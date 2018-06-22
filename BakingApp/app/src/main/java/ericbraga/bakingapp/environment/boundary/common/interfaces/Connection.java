@@ -1,7 +1,7 @@
-package ericbraga.bakingapp.bondary;
+package ericbraga.bakingapp.environment.boundary.common.interfaces;
 
 public interface Connection {
-    void connect(String url, Callback callback);
+    void connect(Callback callback);
 
     interface Callback {
         void onSuccess(String result);

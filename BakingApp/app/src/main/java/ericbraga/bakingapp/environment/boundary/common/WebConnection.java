@@ -1,8 +1,8 @@
-package ericbraga.bakingapp.android.bondary;
+package ericbraga.bakingapp.environment.boundary.common;
 
 import java.io.IOException;
 
-import ericbraga.bakingapp.bondary.Connection;
+import ericbraga.bakingapp.environment.boundary.common.interfaces.Connection;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -10,23 +10,24 @@ import okhttp3.Response;
 
 public class WebConnection implements Connection {
 
-    private final OkHttpClient mClient;
+    private final String mUrl;
 
-    public WebConnection() {
-        mClient = new OkHttpClient();
+    public WebConnection(String url) {
+        mUrl = url;
     }
 
     @Override
-    public void connect(String url, final Callback callback) {
-        if (url == null || url.isEmpty()) {
+    public void connect(final Callback callback) {
+        if (mUrl == null || mUrl.isEmpty()) {
             throw new IllegalArgumentException("Url is null");
         }
 
         try {
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(mUrl)
                     .build();
 
+            OkHttpClient mClient = new OkHttpClient();
             mClient.newCall(request).enqueue(new okhttp3.Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {

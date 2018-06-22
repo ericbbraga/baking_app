@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.utils;
+package ericbraga.bakingapp.environment.boundary.common.interfaces;
 
 import java.util.List;
 
