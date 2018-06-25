@@ -1,18 +1,18 @@
-package ericbraga.bakingapp.environment.boundary.common;
+package ericbraga.bakingapp.environment.common.repositories.web;
 
 import java.io.IOException;
 
-import ericbraga.bakingapp.environment.boundary.common.interfaces.Connection;
+import ericbraga.bakingapp.environment.common.interfaces.Connection;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class WebConnection implements Connection {
+class WebConnection implements Connection {
 
     private final String mUrl;
 
-    public WebConnection(String url) {
+    WebConnection(String url) {
         mUrl = url;
     }
 

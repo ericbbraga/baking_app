@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.environment.boundary;
+package ericbraga.bakingapp.environment.common.repositories.web;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,8 +7,7 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import ericbraga.bakingapp.environment.boundary.common.WebConnection;
-import ericbraga.bakingapp.environment.boundary.common.interfaces.Connection;
+import ericbraga.bakingapp.environment.common.interfaces.Connection;
 
 public class WebConnectionTest {
 
@@ -86,7 +85,6 @@ public class WebConnectionTest {
         synchronized (lock) {
             ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
             Mockito.verify(callback).onSuccess(captor.capture());
-            System.out.println(captor.capture());
         }
     }
 }
