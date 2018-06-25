@@ -1,6 +1,7 @@
 package ericbraga.bakingapp.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Recipe {
@@ -12,5 +13,17 @@ public class Recipe {
         mName = name;
         mIngredients = new ArrayList<>(ingredients);
         mSteps = new ArrayList<>(steps);
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public Iterator<Ingredient> getIngredients() {
+        return mIngredients.iterator();
+    }
+
+    public Iterator<Step> getSteps() {
+        return mSteps.iterator();
     }
 }

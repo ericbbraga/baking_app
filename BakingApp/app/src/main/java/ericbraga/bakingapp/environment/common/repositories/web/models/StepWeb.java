@@ -18,7 +18,15 @@ public class StepWeb {
     @SerializedName("thumbnailURL")
     private String mThumbnailUrl;
 
-    public StepWeb() {
+    public StepWeb() {}
+
+    public StepWeb(int id, String shortDescription, String description, String videoUrl,
+                   String thumbnailUrl) {
+        mId = id;
+        mShortDescription = shortDescription;
+        mDescription = description;
+        mVideoUrl = videoUrl;
+        mThumbnailUrl = thumbnailUrl;
     }
 
     public int id() {

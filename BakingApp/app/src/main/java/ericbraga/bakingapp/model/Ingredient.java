@@ -9,10 +9,10 @@ public class Ingredient {
     }
 
     private float mQuantity;
-    private Measure mMeasure;
+    private int mMeasure;
     private String mName;
 
-    public Ingredient(float quantity, Measure measure, String name) {
+    public Ingredient(String name, float quantity, int measure) {
         mQuantity = quantity;
         mMeasure = measure;
         mName = name;
@@ -22,7 +22,7 @@ public class Ingredient {
         return mQuantity;
     }
 
-    public Measure getMeasure() {
+    public int getMeasure() {
         return mMeasure;
     }
 

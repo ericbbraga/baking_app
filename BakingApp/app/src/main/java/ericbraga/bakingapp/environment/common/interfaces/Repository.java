@@ -1,6 +1,6 @@
 package ericbraga.bakingapp.environment.common.interfaces;
 
-import ericbraga.bakingapp.boundary.RecipeCollection;
+import ericbraga.bakingapp.model.RecipeCollection;
 
 public interface Repository {
 

@@ -2,6 +2,7 @@ package ericbraga.bakingapp.environment.common.repositories.web.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class RecipeWeb {
@@ -9,22 +10,28 @@ public class RecipeWeb {
     private String mName;
 
     @SerializedName("ingredients")
-    private List<IngredientWeb> mIngredientWebs;
+    private List<IngredientWeb> mIngredientWeb;
 
     @SerializedName("steps")
     private List<StepWeb> mStepWebs;
 
     public RecipeWeb() {}
 
+    public RecipeWeb(String name, List<IngredientWeb> ingredientWeb, List<StepWeb> stepWebs) {
+        mName = name;
+        mIngredientWeb = ingredientWeb;
+        mStepWebs = stepWebs;
+    }
+
     public String getName() {
         return mName;
     }
 
-    public List<IngredientWeb> getIngredientWebs() {
-        return mIngredientWebs;
+    public Iterator<IngredientWeb> getIngredientWeb() {
+        return mIngredientWeb.iterator();
     }
 
-    public List<StepWeb> getStepWebs() {
-        return mStepWebs;
+    public Iterator<StepWeb> getStepWebs() {
+        return mStepWebs.iterator();
     }
 }

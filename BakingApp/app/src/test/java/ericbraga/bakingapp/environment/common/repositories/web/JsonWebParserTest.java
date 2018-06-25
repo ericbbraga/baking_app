@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import ericbraga.bakingapp.environment.common.WebRecipeCollection;
+import ericbraga.bakingapp.environment.common.RecipeWebCollection;
 import ericbraga.bakingapp.environment.common.interfaces.Parser;
 import ericbraga.bakingapp.environment.common.repositories.exception.ParserException;
 
@@ -29,7 +29,7 @@ public class JsonWebParserTest {
     public void emptyContent_ShouldReturnEmptyList() {
         Parser parser = new JsonWebParser();
         try {
-            WebRecipeCollection recipes = parser.parse("");
+            RecipeWebCollection recipes = parser.parse("");
             Assert.assertEquals(0, recipes.size());
         } catch(ParserException e) {
             Assert.fail();
@@ -83,7 +83,7 @@ public class JsonWebParserTest {
         }
 
         try {
-            WebRecipeCollection recipes = parser.parse(sb.toString());
+            RecipeWebCollection recipes = parser.parse(sb.toString());
             if (recipes.recipesValid()) {
                 Assert.fail();
             }
