@@ -8,14 +8,14 @@ public class IngredientWeb {
     private float mQuantity;
 
     @SerializedName("measure")
-    private int mMeasure;
+    private String mMeasure;
 
     @SerializedName("ingrediente")
     private String mName;
 
     public IngredientWeb() {}
 
-    public IngredientWeb(String name, float quantity, int measure) {
+    public IngredientWeb(String name, float quantity, String measure) {
         mName = name;
         mQuantity = quantity;
         mMeasure = measure;
@@ -25,7 +25,7 @@ public class IngredientWeb {
         return mQuantity;
     }
 
-    public int getMeasure() {
+    public String getMeasure() {
         return mMeasure;
     }
 

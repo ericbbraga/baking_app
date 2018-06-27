@@ -8,11 +8,11 @@ public class Ingredient {
         public static final int TSP = 2;
     }
 
-    private float mQuantity;
-    private int mMeasure;
     private String mName;
+    private float mQuantity;
+    private String mMeasure;
 
-    public Ingredient(String name, float quantity, int measure) {
+    public Ingredient(String name, float quantity, String measure) {
         mQuantity = quantity;
         mMeasure = measure;
         mName = name;
@@ -22,7 +22,7 @@ public class Ingredient {
         return mQuantity;
     }
 
-    public int getMeasure() {
+    public String getMeasure() {
         return mMeasure;
     }
 

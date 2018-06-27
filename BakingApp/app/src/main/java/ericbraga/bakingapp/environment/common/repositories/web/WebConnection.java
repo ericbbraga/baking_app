@@ -36,7 +36,7 @@ class WebConnection implements Connection {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    callback.onSuccess(response.body().toString());
+                    callback.onSuccess(response.body().string());
                 }
             });
 

@@ -23,4 +23,17 @@ public class RecipeCollection {
     public Iterator<Recipe> iterator() {
         return mRecipes.iterator();
     }
+
+    public Recipe getElement(int position) {
+        if (position <= 0 && position > mRecipes.size()) {
+            throw new IllegalArgumentException("Position is out of range");
+        }
+
+        return mRecipes.get(position);
+    }
+
+
+    public int size() {
+        return mRecipes.size();
+    }
 }
