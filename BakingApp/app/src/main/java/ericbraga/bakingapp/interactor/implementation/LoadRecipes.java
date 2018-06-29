@@ -32,7 +32,6 @@ public class LoadRecipes implements RecipeInteractor, Repository.RepositoryCallb
 
     @Override
     public void errorMessage(String message) {
-        // TODO: Implements Error
         if (mCallback != null) {
             mCallback.onError(message);
         }

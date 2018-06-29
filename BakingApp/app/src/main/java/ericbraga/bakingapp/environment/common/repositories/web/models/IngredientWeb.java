@@ -10,7 +10,7 @@ public class IngredientWeb {
     @SerializedName("measure")
     private String mMeasure;
 
-    @SerializedName("ingrediente")
+    @SerializedName("ingredient")
     private String mName;
 
     public IngredientWeb() {}

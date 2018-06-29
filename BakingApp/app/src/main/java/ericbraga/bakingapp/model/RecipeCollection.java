@@ -25,7 +25,7 @@ public class RecipeCollection {
     }
 
     public Recipe getElement(int position) {
-        if (position <= 0 && position > mRecipes.size()) {
+        if (position < 0 || position > mRecipes.size()) {
             throw new IllegalArgumentException("Position is out of range");
         }
 
