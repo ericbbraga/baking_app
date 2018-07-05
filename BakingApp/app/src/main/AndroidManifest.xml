@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".environment.android.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DescriptionRecipeActivity" />
-        <activity android:name=".activities.StepInformationActivity"></activity>
+        <activity android:name=".environment.android.activities.DescriptionRecipeActivity" />
+        <activity android:name=".environment.android.activities.StepInformationActivity"></activity>
     </application>
 
 </manifest>

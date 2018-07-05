@@ -1,16 +1,16 @@
 package ericbraga.bakingapp.presenter;
 
-import ericbraga.bakingapp.interactor.RecipeInteractor;
+import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
-import ericbraga.bakingapp.mvpcontract.DisplayRecipesContract;
+import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
 
-public class DisplayRecipesPresenter implements DisplayRecipesContract.Presenter, RecipeInteractor.Callback {
+public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.Presenter, RecipeInteractor.Callback {
     private DisplayRecipesContract.View mView;
 
     private RecipeInteractor mInteractor;
 
-    public DisplayRecipesPresenter(RecipeInteractor interactor) {
+    public DisplayRecipeCollectionPresenter(RecipeInteractor interactor) {
         mInteractor = interactor;
     }
 
@@ -20,7 +20,7 @@ public class DisplayRecipesPresenter implements DisplayRecipesContract.Presenter
     }
 
     @Override
-    public void detachView(DisplayRecipesContract.View view) {
+    public void detachView() {
         mView = null;
     }
 

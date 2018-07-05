@@ -14,7 +14,7 @@ import ericbraga.bakingapp.environment.common.interfaces.Parser;
 import ericbraga.bakingapp.environment.common.repositories.exception.ParserException;
 import ericbraga.bakingapp.environment.common.repositories.web.models.RecipeWeb;
 
-class JsonWebParser implements Parser {
+public class JsonWebParser implements Parser {
     @Override
     public RecipeWebCollection parse(String content) throws ParserException {
         if (content == null) {

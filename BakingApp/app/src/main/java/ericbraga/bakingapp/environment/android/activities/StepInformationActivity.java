@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.activities;
+package ericbraga.bakingapp.environment.android.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

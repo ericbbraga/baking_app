@@ -1,7 +1,7 @@
 package ericbraga.bakingapp.interactor.implementation;
 
-import ericbraga.bakingapp.environment.common.interfaces.Repository;
-import ericbraga.bakingapp.interactor.RecipeInteractor;
+import ericbraga.bakingapp.interactor.interfaces.Repository;
+import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
 import ericbraga.bakingapp.model.RecipeCollection;
 
 public class LoadRecipes implements RecipeInteractor, Repository.RepositoryCallback {

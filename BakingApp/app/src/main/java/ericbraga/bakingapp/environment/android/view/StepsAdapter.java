@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
@@ -15,7 +16,7 @@ import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.Step;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder> {
-    private final List<Step> mSteps;
+    private List<Step> mSteps;
 
     private StepsAdapterCallback mCallback;
 
@@ -23,8 +24,14 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
         void onClickItem(Step step);
     }
 
-    public StepsAdapter(List<Step> steps) {
-        mSteps = steps;
+    public StepsAdapter() {
+        mSteps = new ArrayList<>();
+    }
+
+    public void setSteps(List<Step> steps) {
+        mSteps.clear();
+        mSteps.addAll(steps);
+        notifyDataSetChanged();
     }
 
     public void setCallback(StepsAdapterCallback callback) {

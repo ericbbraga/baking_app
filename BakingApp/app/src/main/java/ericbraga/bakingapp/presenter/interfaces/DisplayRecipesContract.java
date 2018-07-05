@@ -1,6 +1,4 @@
-package ericbraga.bakingapp.mvpcontract;
-
-import android.view.View;
+package ericbraga.bakingapp.presenter.interfaces;
 
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
@@ -9,7 +7,7 @@ public interface DisplayRecipesContract {
 
     interface Presenter {
         void attachView(DisplayRecipesContract.View view);
-        void detachView(DisplayRecipesContract.View view);
+        void detachView();
         void onResume();
         void onPause();
         void recipeChosen(Recipe recipe);

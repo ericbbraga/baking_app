@@ -1,26 +1,23 @@
-package ericbraga.bakingapp.mvpcontract;
+package ericbraga.bakingapp.presenter.interfaces;
 
 import android.graphics.Bitmap;
 
-import java.util.Iterator;
 import java.util.List;
 
 import ericbraga.bakingapp.model.Ingredient;
-import ericbraga.bakingapp.model.Recipe;
-import ericbraga.bakingapp.model.RecipeCollection;
 import ericbraga.bakingapp.model.Step;
 
 public interface DescriptionRecipeContract {
-    interface Presenter {
-        void attachView(DescriptionRecipeContract.View view);
+    interface Presenter<T> {
+        void attachView(DescriptionRecipeContract.View<T> view);
         void detachView();
         void onResume();
         void onPause();
         void onClickedItem(Step step);
     }
 
-    interface View {
-        void showImageRecipe(Bitmap recipeBitmap);
+    interface View<T> {
+        void showImageRecipe(T image);
         void showDescriptionRecipe(String recipeName);
         void showIngredients(List<Ingredient> ingredients);
         void showSteps(List<Step>steps);

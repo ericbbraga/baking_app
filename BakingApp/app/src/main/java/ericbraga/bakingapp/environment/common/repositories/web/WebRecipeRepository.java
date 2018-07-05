@@ -3,7 +3,7 @@ package ericbraga.bakingapp.environment.common.repositories.web;
 import ericbraga.bakingapp.boundary.RecipeCollectionWebMapper;
 import ericbraga.bakingapp.environment.common.RecipeWebCollection;
 import ericbraga.bakingapp.environment.common.interfaces.Connection;
-import ericbraga.bakingapp.environment.common.interfaces.Repository;
+import ericbraga.bakingapp.interactor.interfaces.Repository;
 import ericbraga.bakingapp.environment.common.repositories.exception.ParserException;
 import ericbraga.bakingapp.model.RecipeCollection;
 

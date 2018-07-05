@@ -28,14 +28,13 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public IngredientsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.ingredient_element, parent, false);
+        View view = inflater.inflate(R.layout.ingredient_element, parent,false);
 
         return new IngredientsHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull IngredientsHolder ingredientsHolder, int position) {
-
         DecimalFormat decimal = new DecimalFormat("#.##");
 
         Ingredient ingredient = mIngredients.get(position);
@@ -55,13 +54,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     class IngredientsHolder extends RecyclerView.ViewHolder {
 
         TextView mQuantity;
-        ImageView mMeasureImage;
         TextView mName;
 
         IngredientsHolder(View itemView) {
             super(itemView);
             mQuantity = itemView.findViewById(R.id.ingredient_quantity);
-            mMeasureImage = itemView.findViewById(R.id.ingredient_measure);
             mName = itemView.findViewById(R.id.ingredient_name);
         }
     }
