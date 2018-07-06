@@ -13,14 +13,15 @@ public interface DescriptionRecipeContract {
         void detachView();
         void onResume();
         void onPause();
-        void onClickedItem(Step step);
+        void showMoreSteps();
     }
 
     interface View<T> {
         void showImageRecipe(T image);
         void showDescriptionRecipe(String recipeName);
         void showIngredients(List<Ingredient> ingredients);
-        void showSteps(List<Step>steps);
+        void showStepPreview(T image);
+        void showStepName(String title);
         void showMoreStepInfo(Step step);
     }
 

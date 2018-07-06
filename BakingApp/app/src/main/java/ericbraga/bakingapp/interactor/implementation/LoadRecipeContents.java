@@ -31,11 +31,11 @@ public class LoadRecipeContents<T> implements RecipeDisplayInteractor<T>,
 
     private String getBackground(Recipe recipe) {
         List<Step> steps = recipe.getSteps();
-
         String background = null;
 
-        if (steps.size() != 0) {
-            Step step = recipe.getSteps().get(steps.size() - 1);
+        int size = steps.size();
+        if (size != 0) {
+            Step step = steps.get(size - 1);
             String thumbnail = step.getThumbnailUrl();
             String videoUrl = step.getVideoUrl();
 

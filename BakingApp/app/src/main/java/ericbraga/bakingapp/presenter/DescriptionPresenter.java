@@ -3,26 +3,51 @@ package ericbraga.bakingapp.presenter;
 import java.util.List;
 
 import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
+import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
 import ericbraga.bakingapp.model.Ingredient;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.Step;
 import ericbraga.bakingapp.presenter.interfaces.DescriptionRecipeContract;
 
-public class DescriptionPresenter<T> implements DescriptionRecipeContract.Presenter<T>,
-        RecipeDisplayInteractor.Callback<T> {
+public class DescriptionPresenter<T> implements DescriptionRecipeContract.Presenter<T> {
     private final Recipe mRecipe;
-    private final RecipeDisplayInteractor<T> mInteractor;
+    private final RecipeDisplayInteractor<T> mRecipeInteractor;
+    private final StepInteractor<T> mStepInteractor;
     private DescriptionRecipeContract.View<T> mView;
+    private Step mFirstStep;
 
-    public DescriptionPresenter(Recipe recipe, RecipeDisplayInteractor<T> interactor) {
+    public DescriptionPresenter(Recipe recipe,
+                                RecipeDisplayInteractor<T> recipeInteractor,
+                                StepInteractor<T> stepInteractor) {
         mRecipe = recipe;
-        mInteractor = interactor;
+        mRecipeInteractor = recipeInteractor;
+        mStepInteractor = stepInteractor;
     }
 
     @Override
     public void attachView(DescriptionRecipeContract.View<T> view) {
         mView = view;
-        mInteractor.loadRecipeInformation(mRecipe, this);
+        mRecipeInteractor.loadRecipeInformation(mRecipe, recipeCallback());
+    }
+
+    private RecipeDisplayInteractor.Callback<T> recipeCallback() {
+        return new RecipeDisplayInteractor.Callback<T>() {
+
+            @Override
+            public void onSuccess(T image) {
+                mView.showImageRecipe(image);
+            }
+
+            @Override
+            public void displayFallbackImage() {
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        };
     }
 
     @Override
@@ -35,7 +60,7 @@ public class DescriptionPresenter<T> implements DescriptionRecipeContract.Presen
         if (mView != null) {
             setRecipeName(mRecipe.getName());
             setIngredients();
-            setSteps();
+            loadStepPreview();
         }
     }
 
@@ -52,10 +77,35 @@ public class DescriptionPresenter<T> implements DescriptionRecipeContract.Presen
         }
     }
 
-    private void setSteps() {
-        if (mView != null) {
-            mView.showSteps(mRecipe.getSteps());
+    private void loadStepPreview() {
+        List<Step> steps = mRecipe.getSteps();
+        int size = steps.size();
+
+        if (size > 0) {
+            mFirstStep = steps.get(0);
+            mStepInteractor.loadStepInformation(mFirstStep, stepCallback());
         }
+    }
+
+    private StepInteractor.Callback<T> stepCallback() {
+        return new StepInteractor.Callback<T>() {
+
+            @Override
+            public void onSuccess(T image) {
+                mView.showStepPreview(image);
+                mView.showStepName(mFirstStep.getShortDescription());
+            }
+
+            @Override
+            public void displayFallbackImage() {
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        };
     }
 
     @Override
@@ -64,22 +114,7 @@ public class DescriptionPresenter<T> implements DescriptionRecipeContract.Presen
     }
 
     @Override
-    public void onClickedItem(Step step) {
-        mView.showMoreStepInfo(step);
-    }
-
-    @Override
-    public void onSuccess(T image) {
-        mView.showImageRecipe(image);
-    }
-
-    @Override
-    public void displayFallbackImage() {
-
-    }
-
-    @Override
-    public void onError(String message) {
-
+    public void showMoreSteps() {
+        mView.showMoreStepInfo(mFirstStep);
     }
 }

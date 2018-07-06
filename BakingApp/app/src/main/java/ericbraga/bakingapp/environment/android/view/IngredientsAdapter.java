@@ -39,7 +39,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         Ingredient ingredient = mIngredients.get(position);
         ingredientsHolder.mName.setText(ingredient.getName());
-        ingredientsHolder.mQuantity.setText(decimal.format(ingredient.getQuantity()));
+        ingredientsHolder.mQuantity.setText(
+                String.format("%s (%s)",
+                    decimal.format(ingredient.getQuantity()),
+                    ingredient.getMeasure()
+                )
+        );
     }
 
     @Override

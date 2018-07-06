@@ -9,7 +9,7 @@
         <item name="cardViewStyle">@style/CardView</item>
     </style>
 
-    <style name="RecipeStyle">
+    <style name="TitleStyle">
         <item name="android:fontFamily">cursive</item>
         <item name="android:textSize">45sp</item>
         <item name="android:textStyle">bold</item>
