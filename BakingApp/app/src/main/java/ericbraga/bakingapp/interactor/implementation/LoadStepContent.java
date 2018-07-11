@@ -1,12 +1,10 @@
 package ericbraga.bakingapp.interactor.implementation;
 
-import java.util.List;
-
 import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
 import ericbraga.bakingapp.model.Step;
 
-public class LoadStepContent<T> implements StepInteractor<T>,ImageRepository.ImageCallback<T> {
+public class LoadStepContent<T> implements StepInteractor<T>, ImageRepository.ImageCallback<T> {
 
     private final ImageRepository<T> mRepository;
     private Callback<T> mOuterCallback;

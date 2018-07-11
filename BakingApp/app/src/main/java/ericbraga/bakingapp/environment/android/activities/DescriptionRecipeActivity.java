@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
@@ -108,9 +110,9 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showMoreStepInfo(Step step) {
+    public void showMoreStepInfo(List<Step> steps) {
         Intent it = new Intent(this, StepInformationActivity.class);
-        it.putExtra("Step", step);
+        it.putExtra("steps", new ArrayList<>(steps));
         startActivity(it);
     }
 

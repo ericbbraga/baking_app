@@ -115,6 +115,6 @@ public class DescriptionPresenter<T> implements DescriptionRecipeContract.Presen
 
     @Override
     public void showMoreSteps() {
-        mView.showMoreStepInfo(mFirstStep);
+        mView.showMoreStepInfo(mRecipe.getSteps());
     }
 }

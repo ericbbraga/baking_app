@@ -22,7 +22,7 @@ public interface DescriptionRecipeContract {
         void showIngredients(List<Ingredient> ingredients);
         void showStepPreview(T image);
         void showStepName(String title);
-        void showMoreStepInfo(Step step);
+        void showMoreStepInfo(List<Step> steps);
     }
 
 }
