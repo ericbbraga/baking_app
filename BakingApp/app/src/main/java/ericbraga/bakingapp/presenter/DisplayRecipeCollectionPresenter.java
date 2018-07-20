@@ -1,6 +1,7 @@
 package ericbraga.bakingapp.presenter;
 
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
+import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
 import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
@@ -41,7 +42,12 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
     @Override
     public void onResultReceive(RecipeCollection collection) {
         if (mView != null) {
-            mView.display(collection);
+
+            if (collection.size() == 0) {
+                mView.showEmptyList();
+            } else {
+                mView.display(collection);
+            }
         }
     }
 

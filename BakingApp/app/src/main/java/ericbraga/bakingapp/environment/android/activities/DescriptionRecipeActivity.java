@@ -11,17 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
 import ericbraga.bakingapp.environment.android.repositories.GlideLoader;
 import ericbraga.bakingapp.environment.android.view.IngredientsAdapter;
-import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
+import ericbraga.bakingapp.environment.common.repositories.local.models.IngredientLocal;
+import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.implementation.LoadRecipeContents;
 import ericbraga.bakingapp.interactor.implementation.LoadStepContent;
 import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
 import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
+import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
+import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
 import ericbraga.bakingapp.model.Ingredient;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.Step;
@@ -42,7 +44,7 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Recipe recipe = (Recipe) getIntent().getExtras().get("Recipe");
+        Recipe recipe = (Recipe) getIntent().getExtras().get("recipe");
 
         configureViews();
         configurePresenter(recipe);

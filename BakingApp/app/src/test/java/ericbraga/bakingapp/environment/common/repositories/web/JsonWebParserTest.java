@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import ericbraga.bakingapp.environment.common.RecipeWebCollection;
 import ericbraga.bakingapp.environment.common.interfaces.Parser;
 import ericbraga.bakingapp.environment.common.repositories.exception.ParserException;
 

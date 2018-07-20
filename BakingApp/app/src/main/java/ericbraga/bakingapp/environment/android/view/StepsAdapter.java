@@ -12,23 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
-import ericbraga.bakingapp.model.Recipe;
-import ericbraga.bakingapp.model.Step;
+import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder> {
-    private List<Step> mSteps;
+    private List<StepLocal> mSteps;
 
     private StepsAdapterCallback mCallback;
 
     public interface StepsAdapterCallback {
-        void onClickItem(Step step);
+        void onClickItem(StepLocal step);
     }
 
     public StepsAdapter() {
         mSteps = new ArrayList<>();
     }
 
-    public void setSteps(List<Step> steps) {
+    public void setSteps(List<StepLocal> steps) {
         mSteps.clear();
         mSteps.addAll(steps);
         notifyDataSetChanged();
@@ -49,7 +48,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull StepsHolder holder, int position) {
-        Step step = mSteps.get(position);
+        StepLocal step = mSteps.get(position);
         holder.mTitle.setText(step.getShortDescription());
     }
 
@@ -71,7 +70,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
         public void onClick(View view) {
             if (mCallback != null) {
                 int position = getAdapterPosition();
-                Step step = mSteps.get(position);
+                StepLocal step = mSteps.get(position);
                 mCallback.onClickItem(step);
             }
         }

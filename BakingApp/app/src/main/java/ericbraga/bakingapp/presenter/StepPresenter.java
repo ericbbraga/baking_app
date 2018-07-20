@@ -34,14 +34,18 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
 
     @Override
     public void nextStepWidgetClicked() {
-        mCurrentStepIndex = mCurrentStepIndex + 1;
-        loadStepContent();
+        if (hasNextStep()) {
+            mCurrentStepIndex = mCurrentStepIndex + 1;
+            loadStepContent();
+        }
     }
 
     @Override
     public void previousStepWidgetClicked() {
-        mCurrentStepIndex = mCurrentStepIndex - 1;
-        loadStepContent();
+        if (hasPreviousStep()) {
+            mCurrentStepIndex = mCurrentStepIndex - 1;
+            loadStepContent();
+        }
     }
 
     private void loadStepContent() {
@@ -73,6 +77,33 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
     private void displayCommonInformation() {
         mView.displayShortDescription(mCurrentStep.getShortDescription());
         mView.displayDescription(mCurrentStep.getDescription());
+
+        toggleNextWidget();
+        togglePreviousWidget();
+    }
+
+    private void togglePreviousWidget() {
+        if (hasPreviousStep()) {
+            mView.enablePreviousWidget();
+        } else {
+            mView.disablePreviousWidget();
+        }
+    }
+
+    private void toggleNextWidget() {
+        if (hasNextStep()) {
+            mView.enableNextWidget();
+        } else {
+            mView.disableNextWidget();
+        }
+    }
+
+    private boolean hasNextStep() {
+        return mCurrentStepIndex < mSteps.size() - 1;
+    }
+
+    private boolean hasPreviousStep() {
+        return mCurrentStepIndex > 0;
     }
 
     @Override

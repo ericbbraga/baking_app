@@ -1,26 +1,26 @@
 package ericbraga.bakingapp.interactor.implementation;
 
-import ericbraga.bakingapp.interactor.interfaces.Repository;
+import ericbraga.bakingapp.interactor.interfaces.ReadRepository;
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
 import ericbraga.bakingapp.model.RecipeCollection;
 
-public class LoadRecipes implements RecipeInteractor, Repository.RepositoryCallback {
+public class LoadRecipes implements RecipeInteractor, ReadRepository.RepositoryCallback {
 
-    private final Repository mRepository;
+    private final ReadRepository mReadRepository;
     private RecipeInteractor.Callback mCallback;
 
-    public LoadRecipes(Repository repository) {
-        if (repository == null) {
-            throw new IllegalArgumentException("Repository could not be null");
+    public LoadRecipes(ReadRepository readRepository) {
+        if (readRepository == null) {
+            throw new IllegalArgumentException("ReadRepository could not be null");
         }
 
-        mRepository = repository;
+        mReadRepository = readRepository;
     }
 
     @Override
     public void load(RecipeInteractor.Callback callback) {
         mCallback = callback;
-        mRepository.listRecipes(this);
+        mReadRepository.listRecipes(this);
     }
 
     @Override

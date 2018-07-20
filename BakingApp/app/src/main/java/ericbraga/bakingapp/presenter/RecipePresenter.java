@@ -1,5 +1,6 @@
 package ericbraga.bakingapp.presenter;
 
+import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.presenter.interfaces.RecipeContract;

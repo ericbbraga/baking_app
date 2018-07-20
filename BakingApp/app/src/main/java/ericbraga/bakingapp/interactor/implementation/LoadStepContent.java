@@ -1,6 +1,7 @@
 package ericbraga.bakingapp.interactor.implementation;
 
-import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
+import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
+import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
 import ericbraga.bakingapp.model.Step;
 

@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.environment.common;
+package ericbraga.bakingapp.environment.common.repositories.web;
 
 import java.util.ArrayList;
 import java.util.Iterator;

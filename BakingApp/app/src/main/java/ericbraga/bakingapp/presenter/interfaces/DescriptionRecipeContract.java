@@ -1,7 +1,5 @@
 package ericbraga.bakingapp.presenter.interfaces;
 
-import android.graphics.Bitmap;
-
 import java.util.List;
 
 import ericbraga.bakingapp.model.Ingredient;

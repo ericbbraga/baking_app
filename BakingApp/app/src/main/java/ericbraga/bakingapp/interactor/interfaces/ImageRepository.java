@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.environment.common.interfaces;
+package ericbraga.bakingapp.interactor.interfaces;
 
 public interface ImageRepository<T> {
     interface ImageCallback<T> {

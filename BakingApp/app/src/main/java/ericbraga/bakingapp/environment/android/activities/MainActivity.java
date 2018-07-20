@@ -8,14 +8,17 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import ericbraga.bakingapp.R;
-import ericbraga.bakingapp.boundary.RecipeCollectionWebMapper;
 import ericbraga.bakingapp.environment.android.factories.RecipePresenterFactory;
 import ericbraga.bakingapp.environment.android.repositories.GlideLoader;
 import ericbraga.bakingapp.environment.android.view.RecipesCardAdapter;
-import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
-import ericbraga.bakingapp.environment.common.repositories.web.WebRecipeRepository;
+import ericbraga.bakingapp.environment.common.repositories.RepositoryFactory;
+import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
+import ericbraga.bakingapp.environment.common.repositories.web.WebRecipeReadRepository;
+import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
+import ericbraga.bakingapp.interactor.interfaces.ReadRepository;
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
 import ericbraga.bakingapp.interactor.implementation.LoadRecipes;
 import ericbraga.bakingapp.model.Recipe;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private DisplayRecipesContract.Presenter mPresenter;
 
     private RecyclerView mRecyclerView;
+    private View mNoElementsView;
     private RecipesCardAdapter mRecipesCardAdapter;
     private Looper mLooper;
 
@@ -65,8 +69,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initPresenter() {
-        WebRecipeRepository repository = new WebRecipeRepository(WEB_URL,
-                new RecipeCollectionWebMapper());
+        ReadRepository repository = RepositoryFactory.getRepository(true, this, WEB_URL);
         RecipeInteractor recipeInteractor = new LoadRecipes(repository);
         mPresenter = new DisplayRecipeCollectionPresenter(recipeInteractor);
 
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity
         new Handler(mLooper).post(new Runnable() {
             @Override
             public void run() {
+                mRecyclerView.setVisibility(View.VISIBLE);
+                mNoElementsView.setVisibility(View.INVISIBLE);
                 mRecipesCardAdapter.setRecipeCollection(collection);
             }
         });
@@ -96,8 +101,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void displayNextScreen(Recipe recipe) {
         Intent intent = new Intent(this, DescriptionRecipeActivity.class);
-        intent.putExtra("Recipe", recipe);
+        intent.putExtra("recipe", recipe);
         startActivity(intent);
+    }
+
+    @Override
+    public void showEmptyList() {
+        mNoElementsView.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
     }
 
     @Override

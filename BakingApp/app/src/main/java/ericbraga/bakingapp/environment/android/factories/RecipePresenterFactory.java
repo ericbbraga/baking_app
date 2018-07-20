@@ -1,6 +1,7 @@
 package ericbraga.bakingapp.environment.android.factories;
 
-import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
+import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
+import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
 import ericbraga.bakingapp.interactor.implementation.LoadRecipeContents;
 import ericbraga.bakingapp.model.Recipe;

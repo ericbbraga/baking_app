@@ -2,8 +2,8 @@ package ericbraga.bakingapp.environment.android.activities;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,11 +28,11 @@ import java.util.List;
 
 import ericbraga.bakingapp.R;
 import ericbraga.bakingapp.environment.android.repositories.GlideLoader;
-import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.implementation.LoadStepContent;
 import ericbraga.bakingapp.interactor.implementation.LoadStepsFurtherInfo;
 import ericbraga.bakingapp.interactor.implementation.MediaPlayer;
 import ericbraga.bakingapp.interactor.interfaces.ExternalMediaController;
+import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.interfaces.StepContentInteractor;
 import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
 import ericbraga.bakingapp.model.Step;
@@ -46,6 +46,8 @@ public class StepInformationActivity extends AppCompatActivity
     private PlayerView mExoPlayerView;
     private ExoPlayer mExoPlayer;
     private ImageView mThumbnailPreview;
+    private View mNextWidget;
+    private View mPreviousWidget;
     private boolean mPlayingVideo;
 
     private DisplayStepContract.Presenter<Drawable> mPresenter;
@@ -78,8 +80,11 @@ public class StepInformationActivity extends AppCompatActivity
         mExoPlayerView = findViewById(R.id.step_information_video);
         mThumbnailPreview = findViewById(R.id.step_information_thumbnail);
 
-        findViewById(R.id.step_information_previous_step).setOnClickListener(this);
-        findViewById(R.id.step_information_next_step).setOnClickListener(this);
+        mNextWidget = findViewById(R.id.step_information_next_step);
+        mNextWidget.setOnClickListener(this);
+
+        mPreviousWidget = findViewById(R.id.step_information_previous_step);
+        mPreviousWidget.setOnClickListener(this);
     }
 
     private void createExoPlayer() {
@@ -150,13 +155,23 @@ public class StepInformationActivity extends AppCompatActivity
     }
 
     @Override
-    public void disablePreviusWidget() {
+    public void enablePreviousWidget() {
+        mPreviousWidget.setEnabled(true);
+    }
 
+    @Override
+    public void disablePreviousWidget() {
+        mPreviousWidget.setEnabled(false);
+    }
+
+    @Override
+    public void enableNextWidget() {
+        mNextWidget.setEnabled(true);
     }
 
     @Override
     public void disableNextWidget() {
-
+        mNextWidget.setEnabled(false);
     }
 
     @Override

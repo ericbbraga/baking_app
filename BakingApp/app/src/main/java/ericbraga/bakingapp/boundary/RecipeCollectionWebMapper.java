@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ericbraga.bakingapp.environment.common.RecipeWebCollection;
+import ericbraga.bakingapp.environment.common.repositories.web.RecipeWebCollection;
+import ericbraga.bakingapp.environment.common.repositories.local.models.IngredientLocal;
+import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
+import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
 import ericbraga.bakingapp.environment.common.repositories.web.models.IngredientWeb;
 import ericbraga.bakingapp.environment.common.repositories.web.models.RecipeWeb;
 import ericbraga.bakingapp.environment.common.repositories.web.models.StepWeb;
@@ -129,7 +132,4 @@ public class RecipeCollectionWebMapper {
 
         return stepsWeb;
     }
-
-
-
 }

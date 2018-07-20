@@ -10,7 +10,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import ericbraga.bakingapp.environment.common.interfaces.ImageRepository;
+import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 
 public class GlideLoader implements ImageRepository<Drawable> {
     private final Context mContext;

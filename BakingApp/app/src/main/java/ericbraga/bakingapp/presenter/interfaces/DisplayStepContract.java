@@ -16,7 +16,9 @@ public interface DisplayStepContract {
         void displayDefaultImage();
         void hideVideo();
         void hidePreview();
-        void disablePreviusWidget();
+        void enablePreviousWidget();
+        void disablePreviousWidget();
         void disableNextWidget();
+        void enableNextWidget();
     }
 }

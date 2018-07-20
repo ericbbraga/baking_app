@@ -2,7 +2,7 @@ package ericbraga.bakingapp.interactor.interfaces;
 
 import ericbraga.bakingapp.model.RecipeCollection;
 
-public interface Repository {
+public interface ReadRepository {
 
     interface RepositoryCallback {
         void listRecipesContent(RecipeCollection recipes);

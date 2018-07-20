@@ -9,12 +9,11 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
-import ericbraga.bakingapp.environment.common.RecipeWebCollection;
 import ericbraga.bakingapp.environment.common.interfaces.Parser;
 import ericbraga.bakingapp.environment.common.repositories.exception.ParserException;
 import ericbraga.bakingapp.environment.common.repositories.web.models.RecipeWeb;
 
-public class JsonWebParser implements Parser {
+public class JsonWebParser implements Parser<RecipeWebCollection> {
     @Override
     public RecipeWebCollection parse(String content) throws ParserException {
         if (content == null) {
@@ -35,5 +34,11 @@ public class JsonWebParser implements Parser {
         } catch(JsonSyntaxException e) {
             throw new ParserException(e.getMessage());
         }
+    }
+
+    @Override
+    public String toJson(RecipeWebCollection object) throws ParserException {
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(object);
     }
 }

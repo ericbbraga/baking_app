@@ -3,6 +3,8 @@
     package="ericbraga.bakingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,12 +16,11 @@
         <activity android:name=".environment.android.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".environment.android.activities.DescriptionRecipeActivity" />
-        <activity android:name=".environment.android.activities.StepInformationActivity"></activity>
+        <activity android:name=".environment.android.activities.StepInformationActivity"/>
     </application>
 
 </manifest>
