@@ -15,15 +15,38 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TitleStyleDescription">
+        <item name="android:fontFamily">cursive</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleStyleIngredients">
+        <item name="android:fontFamily">cursive</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleStyleStep">
+        <item name="android:fontFamily">cursive</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TitleStyleMedia">
         <item name="android:fontFamily">cursive</item>
         <item name="android:textSize">30sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="IngredientsRecipeStyle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="DescriptionRecipeStyle">
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TitleWarning">
@@ -34,6 +57,19 @@
 
     <style name="Progress">
         <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AlertImage">
+        <item name="android:src">@android:drawable/ic_dialog_alert</item>
+        <item name="android:tint">#000000</item>
+    </style>
+
+    <style name="ImagePlay" parent="ExoMediaButton.Play">
+        <item name="android:tint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ImagePause" parent="ExoMediaButton.Pause">
+        <item name="android:tint">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

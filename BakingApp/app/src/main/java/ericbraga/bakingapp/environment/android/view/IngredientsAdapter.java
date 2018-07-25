@@ -37,13 +37,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         DecimalFormat decimal = new DecimalFormat("#.##");
 
         Ingredient ingredient = mIngredients.get(position);
-        ingredientsHolder.mName.setText(ingredient.getName());
-        ingredientsHolder.mQuantity.setText(
-                String.format("%s (%s)",
-                    decimal.format(ingredient.getQuantity()),
-                    ingredient.getMeasure()
-                )
+        String ingredientFormated = String.format("* %s - (%s %s)",
+                ingredient.getName(),
+                decimal.format(ingredient.getQuantity()),
+                ingredient.getMeasure()
         );
+        ingredientsHolder.mName.setText(ingredientFormated);
     }
 
     @Override
@@ -56,13 +55,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     class IngredientsHolder extends RecyclerView.ViewHolder {
-
-        TextView mQuantity;
         TextView mName;
 
         IngredientsHolder(View itemView) {
             super(itemView);
-            mQuantity = itemView.findViewById(R.id.ingredient_quantity);
             mName = itemView.findViewById(R.id.ingredient_name);
         }
     }

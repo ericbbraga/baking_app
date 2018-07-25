@@ -10,6 +10,7 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:cardCornerRadius="5dp"
         app:contentPadding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,17 +22,16 @@
 
             <ImageView
                 android:id="@+id/description_recipe_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitXY"
-                tools:background="#FF0000"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="center"
                 android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/description_recipe_name"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center"
+                android:layout_height="50dp"
+                android:textAlignment="center"
                 android:layout_toRightOf="@+id/description_recipe_image"
                 android:layout_toEndOf="@+id/description_recipe_image"
                 style="@style/TitleStyle"
@@ -40,37 +40,45 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
+    <TextView
+        android:id="@+id/description_ingredients_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/ingredients"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryLight"
+        style="@style/TitleStyleIngredients"
+        tools:background="#FFFF00"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/description_ingredients"
         android:layout_width="0dp"
         android:layout_height="250dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintLeft_toLeftOf="@+id/cardView"
-        app:layout_constraintRight_toRightOf="@+id/cardView" />
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@color/colorPrimaryLight"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/description_ingredients_title"
+        app:layout_constraintLeft_toLeftOf="@+id/description_ingredients_title"
+        app:layout_constraintRight_toRightOf="@+id/description_ingredients_title" />
 
-    <ImageView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/description_steps_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
-        android:layout_marginBottom="10dp"
+        android:paddingTop="10dp"
+        android:overScrollMode="never"
         app:layout_constraintTop_toBottomOf="@+id/description_ingredients"
         app:layout_constraintLeft_toLeftOf="@+id/description_ingredients"
         app:layout_constraintRight_toRightOf="@+id/description_ingredients"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="TODO" />
-
-    <TextView
-        android:id="@+id/description_steps_preview_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/description_steps_preview"
-        android:textColor="@color/colorAccent"
-        android:paddingLeft="10dp"
-        android:layout_marginStart="10dp"
-        style="@style/TitleStyle"
-        tools:text="Something"
-        tools:textColor="#FF0000" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </android.support.constraint.ConstraintLayout>

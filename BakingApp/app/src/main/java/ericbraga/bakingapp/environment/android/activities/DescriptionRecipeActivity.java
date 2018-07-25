@@ -1,81 +1,84 @@
 package ericbraga.bakingapp.environment.android.activities;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
-import ericbraga.bakingapp.environment.android.repositories.GlideLoader;
-import ericbraga.bakingapp.environment.android.view.IngredientsAdapter;
-import ericbraga.bakingapp.environment.common.repositories.local.models.IngredientLocal;
-import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
-import ericbraga.bakingapp.interactor.implementation.LoadRecipeContents;
-import ericbraga.bakingapp.interactor.implementation.LoadStepContent;
-import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
-import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
-import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
-import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
-import ericbraga.bakingapp.model.Ingredient;
+import ericbraga.bakingapp.environment.android.fragments.DescriptionFragment;
+import ericbraga.bakingapp.environment.android.fragments.EmptyFragment;
+import ericbraga.bakingapp.environment.android.fragments.StepFragmentHelper;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.Step;
 import ericbraga.bakingapp.presenter.DescriptionPresenter;
 import ericbraga.bakingapp.presenter.interfaces.DescriptionRecipeContract;
 
 public class DescriptionRecipeActivity extends AppCompatActivity implements
-        View.OnClickListener, DescriptionRecipeContract.View<Drawable> {
+        DescriptionRecipeContract.Router {
 
-    private DescriptionRecipeContract.Presenter<Drawable> mPresenter;
-
-    private ImageView mImageRecipe;
-    private TextView mNameRecipe;
-    private RecyclerView mIngredientsRecyclerView;
-    private ImageView mStepsPreview;
-    private TextView mStepName;
+    private DescriptionRecipeContract.Presenter mPresenter;
+    private Fragment mCurrentDetailFragment;
+    private DescriptionFragment mDescriptionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Recipe recipe = (Recipe) getIntent().getExtras().get("recipe");
 
-        configureViews();
         configurePresenter(recipe);
-    }
-
-    private void configureViews() {
-        setContentView(R.layout.activity_description_recipe);
-        mImageRecipe = findViewById(R.id.description_recipe_image);
-        mNameRecipe = findViewById(R.id.description_recipe_name);
-        mIngredientsRecyclerView = findViewById(R.id.description_ingredients);
-        mStepsPreview = findViewById(R.id.description_steps_preview);
-        mStepName = findViewById(R.id.description_steps_preview_title);
-
-        mStepsPreview.setOnClickListener(this);
+        configureViews();
     }
 
     private void configurePresenter(Recipe recipe) {
-        RecipeDisplayInteractor<Drawable> recipeInteractor = createRecipeInteractor();
-        StepInteractor<Drawable> stepInteractor = createStepInteractor();
-        mPresenter = new DescriptionPresenter<>(recipe, recipeInteractor, stepInteractor);
-        mPresenter.attachView(this);
+        mPresenter = new DescriptionPresenter(this, recipe);
     }
 
-    private RecipeDisplayInteractor<Drawable> createRecipeInteractor() {
-        ImageRepository<Drawable> imageRepository = new GlideLoader(this);
-        return new LoadRecipeContents<>(imageRepository);
+    private void configureViews() {
+        setContentView(R.layout.description_recipe_activity);
+        configureFragments();
     }
 
-    private StepInteractor<Drawable> createStepInteractor() {
-        ImageRepository<Drawable> imageRepository = new GlideLoader(this);
-        return new LoadStepContent<>(imageRepository);
+    private void configureFragments() {
+        configureMasterDescriptionFragment();
+        configureDetailFragment();
+        updateFragment();
+    }
+
+    private void configureMasterDescriptionFragment() {
+        mDescriptionFragment = new DescriptionFragment();
+        mDescriptionFragment.setPresenter(mPresenter);
+    }
+
+    private void configureDetailFragment() {
+        if (shouldShowDetailFragment()) {
+            if (mCurrentDetailFragment == null) {
+                mCurrentDetailFragment = new EmptyFragment();
+            }
+        }
+    }
+
+    private boolean shouldShowDetailFragment() {
+        View detailFragment = findViewById(R.id.detail_description_part);
+        return detailFragment != null;
+    }
+
+    private void updateFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.master_description_part, mDescriptionFragment);
+
+        if (shouldShowDetailFragment()) {
+            transaction.replace(R.id.detail_description_part, mCurrentDetailFragment);
+        }
+
+        transaction.commit();
     }
 
     @Override
@@ -85,41 +88,17 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showImageRecipe(Drawable image) {
-        mImageRecipe.setImageDrawable(image);
-    }
+    public void showMoreStepInfo(List<Step> steps, int position) {
+        if (shouldShowDetailFragment()) {
+            StepFragmentHelper helper = new StepFragmentHelper(this, steps, position);
+            mCurrentDetailFragment = helper.createStepFragment();
+            updateFragment();
 
-    @Override
-    public void showDescriptionRecipe(String recipeName) {
-        mNameRecipe.setText(recipeName);
-    }
-
-    @Override
-    public void showIngredients(List<Ingredient> ingredients) {
-        IngredientsAdapter adapter = new IngredientsAdapter(ingredients);
-        mIngredientsRecyclerView.setAdapter(adapter);
-        mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    @Override
-    public void showStepPreview(Drawable image) {
-        mStepsPreview.setImageDrawable(image);
-    }
-
-    @Override
-    public void showStepName(String title) {
-        mStepName.setText(title);
-    }
-
-    @Override
-    public void showMoreStepInfo(List<Step> steps) {
-        Intent it = new Intent(this, StepInformationActivity.class);
-        it.putExtra("steps", new ArrayList<>(steps));
-        startActivity(it);
-    }
-
-    @Override
-    public void onClick(View view) {
-        mPresenter.showMoreSteps();
+        } else {
+            Intent it = new Intent(this, StepInformationActivity.class);
+            it.putExtra("steps", new ArrayList<>(steps));
+            it.putExtra("step_selected", position);
+            startActivity(it);
+        }
     }
 }

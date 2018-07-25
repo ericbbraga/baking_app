@@ -17,7 +17,11 @@ public interface DisplayRecipesContract {
     interface View {
         void display(RecipeCollection recipes);
         void showError(String message);
-        void displayNextScreen(Recipe recipe);
         void showEmptyList();
+        void hideEmptyList();
+    }
+
+    interface Router {
+        void displayNextScreen(Recipe recipe);
     }
 }

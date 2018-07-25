@@ -10,27 +10,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import ericbraga.bakingapp.R;
-import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
+import ericbraga.bakingapp.model.Step;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder> {
-    private List<StepLocal> mSteps;
+    private List<Step> mSteps;
 
     private StepsAdapterCallback mCallback;
 
     public interface StepsAdapterCallback {
-        void onClickItem(StepLocal step);
+        void onClickItem(int position);
     }
 
-    public StepsAdapter() {
-        mSteps = new ArrayList<>();
-    }
-
-    public void setSteps(List<StepLocal> steps) {
-        mSteps.clear();
-        mSteps.addAll(steps);
-        notifyDataSetChanged();
+    public StepsAdapter(List<Step> steps) {
+        mSteps = new ArrayList<>(steps);
     }
 
     public void setCallback(StepsAdapterCallback callback) {
@@ -48,8 +43,12 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull StepsHolder holder, int position) {
-        StepLocal step = mSteps.get(position);
-        holder.mTitle.setText(step.getShortDescription());
+        Step step = mSteps.get(position);
+
+        String stepDescription = String.format(Locale.getDefault(),
+                "%d. %s", position, step.getShortDescription());
+
+        holder.mTitle.setText(stepDescription);
     }
 
     @Override
@@ -70,8 +69,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
         public void onClick(View view) {
             if (mCallback != null) {
                 int position = getAdapterPosition();
-                StepLocal step = mSteps.get(position);
-                mCallback.onClickItem(step);
+                mCallback.onClickItem(position);
             }
         }
     }

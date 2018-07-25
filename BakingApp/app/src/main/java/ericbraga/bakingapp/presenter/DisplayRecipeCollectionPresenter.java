@@ -1,5 +1,7 @@
 package ericbraga.bakingapp.presenter;
 
+import android.media.MediaRouter;
+
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
 import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.model.Recipe;
@@ -7,11 +9,14 @@ import ericbraga.bakingapp.model.RecipeCollection;
 import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
 
 public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.Presenter, RecipeInteractor.Callback {
+    private final DisplayRecipesContract.Router mRouter;
     private DisplayRecipesContract.View mView;
 
     private RecipeInteractor mInteractor;
 
-    public DisplayRecipeCollectionPresenter(RecipeInteractor interactor) {
+    public DisplayRecipeCollectionPresenter(DisplayRecipesContract.Router router,
+                                            RecipeInteractor interactor) {
+        mRouter = router;
         mInteractor = interactor;
     }
 
@@ -27,6 +32,7 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
 
     @Override
     public void onResume() {
+        mView.hideEmptyList();
         mInteractor.load(this);
     }
 
@@ -36,7 +42,7 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
 
     @Override
     public void recipeChosen(Recipe recipe) {
-        mView.displayNextScreen(recipe);
+        mRouter.displayNextScreen(recipe);
     }
 
     @Override

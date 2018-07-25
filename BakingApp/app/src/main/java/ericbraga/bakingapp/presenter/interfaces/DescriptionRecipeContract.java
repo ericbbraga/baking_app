@@ -6,21 +6,22 @@ import ericbraga.bakingapp.model.Ingredient;
 import ericbraga.bakingapp.model.Step;
 
 public interface DescriptionRecipeContract {
-    interface Presenter<T> {
-        void attachView(DescriptionRecipeContract.View<T> view);
+    interface Presenter {
+        void attachView(DescriptionRecipeContract.View view);
         void detachView();
         void onResume();
         void onPause();
-        void showMoreSteps();
+        void showMoreSteps(int position);
     }
 
-    interface View<T> {
-        void showImageRecipe(T image);
+    interface View {
         void showDescriptionRecipe(String recipeName);
         void showIngredients(List<Ingredient> ingredients);
-        void showStepPreview(T image);
-        void showStepName(String title);
-        void showMoreStepInfo(List<Step> steps);
+        void showSteps(List<Step> steps);
+    }
+
+    interface Router {
+        void showMoreStepInfo(List<Step> steps, int position);
     }
 
 }

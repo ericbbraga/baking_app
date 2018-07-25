@@ -6,14 +6,15 @@ public interface DisplayStepContract {
         void onResume();
         void nextStepWidgetClicked();
         void previousStepWidgetClicked();
+        void detach();
     }
 
     interface View<T> {
         void displayShortDescription(String shortDescription);
         void displayDescription(String description);
         void displayPreview(T image);
-        void displayVideo(String url);
-        void displayDefaultImage();
+        void displayVideo();
+        void removeAllRecipePreviewElements();
         void hideVideo();
         void hidePreview();
         void enablePreviousWidget();
