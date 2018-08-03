@@ -1,0 +1,95 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5547601452072121874",
+      "lastPropertyId": "3:1337975447819699124",
+      "name": "IngredientLocal",
+      "properties": [
+        {
+          "id": "1:7656283890034371478",
+          "name": "mName"
+        },
+        {
+          "id": "2:2615221701874918619",
+          "name": "mMeasure"
+        },
+        {
+          "id": "3:1337975447819699124",
+          "name": "mQuantity"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3696866230665169577",
+      "lastPropertyId": "5:6365318146297601398",
+      "name": "StepLocal",
+      "properties": [
+        {
+          "id": "1:8907365220089837340",
+          "name": "mOrder"
+        },
+        {
+          "id": "2:1566351076180805618",
+          "name": "mShortDescription"
+        },
+        {
+          "id": "3:3513283084421343514",
+          "name": "mDescription"
+        },
+        {
+          "id": "4:4562039560250533637",
+          "name": "mVideoUrl"
+        },
+        {
+          "id": "5:6365318146297601398",
+          "name": "mThumbnailUrl"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:954115394320388782",
+      "lastPropertyId": "3:2658140357303874761",
+      "name": "RecipeLocal",
+      "properties": [
+        {
+          "id": "1:7566676086932549034",
+          "name": "mId"
+        },
+        {
+          "id": "2:2785894337842557830",
+          "name": "mName"
+        },
+        {
+          "id": "3:2658140357303874761",
+          "name": "mStarred"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:4383643954329345079",
+          "name": "mIngredients"
+        },
+        {
+          "id": "2:1365410270656219791",
+          "name": "mSteps"
+        }
+      ]
+    }
+  ],
+  "lastEntityId": "3:954115394320388782",
+  "lastIndexId": "0:0",
+  "lastRelationId": "2:1365410270656219791",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

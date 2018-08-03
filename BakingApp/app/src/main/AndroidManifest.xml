@@ -3,24 +3,46 @@
     package="ericbraga.bakingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/dessert"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/dessert"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".environment.android.activities.MainActivity">
+        <activity android:name=".environment.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".environment.android.activities.DescriptionRecipeActivity" />
-        <activity android:name=".environment.android.activities.StepInformationActivity"/>
+        <activity android:name=".environment.activities.DescriptionRecipeActivity" />
+        <activity android:name=".environment.activities.StepInformationActivity" />
+
+        <receiver android:name=".environment.widget.RecipeWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/recipe_widget_info" />
+        </receiver>
+
+        <provider
+            android:authorities="ericbraga.bakingapp"
+            android:name=".environment.repositories.local.database.BakingProvider"
+            android:exported="true"/>
+
+        <service
+            android:name=".environment.widget.RecipeWidgetViewService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service android:name=".environment.widget.ServiceRecipeWidget" />
     </application>
 
 </manifest>

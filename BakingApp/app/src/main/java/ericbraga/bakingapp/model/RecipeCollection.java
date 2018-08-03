@@ -32,8 +32,21 @@ public class RecipeCollection {
         return mRecipes.get(position);
     }
 
-
     public int size() {
         return mRecipes.size();
+    }
+
+    public void clear() {
+        mRecipes.clear();
+    }
+
+    public Recipe getRecipeById(int recipeId) {
+        for (Recipe recipe : mRecipes) {
+            if (recipe.getId() == recipeId) {
+                return recipe;
+            }
+        }
+
+        return null;
     }
 }

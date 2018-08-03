@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="200dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -34,7 +34,7 @@
             <ImageView
                 android:id="@+id/baking_element_banner"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_launcher_background"
                 android:contentDescription="TODO" />
@@ -48,6 +48,18 @@
                 android:layout_marginLeft="5dp"
                 style="@style/TitleStyle"
                 tools:text="Something" />
+
+            <ToggleButton
+                android:id="@+id/baking_star"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:layout_alignBottom="@+id/baking_element_banner"
+                android:layout_alignRight="@+id/baking_element_banner"
+                android:textOff="@null"
+                android:textOn="@null"
+                android:background="@drawable/ic_star"
+                android:contentDescription="TODO" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".environment.android.activities.MainActivity">
+    tools:context=".environment.activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/master_list_part"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
-        tools:context=".environment.android.activities.MainActivity"/>
+        tools:context=".environment.activities.MainActivity"/>
 
 </android.support.constraint.ConstraintLayout>

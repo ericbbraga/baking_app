@@ -1,6 +1,5 @@
 package ericbraga.bakingapp.presenter.interfaces;
 
-import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
 
@@ -12,11 +11,13 @@ public interface DisplayRecipesContract {
         void onResume();
         void onPause();
         void recipeChosen(Recipe recipe);
+        void favoriteItem(Recipe recipe, boolean starred);
     }
 
     interface View {
         void display(RecipeCollection recipes);
         void showError(String message);
+        void clearFavoriteItem();
         void showEmptyList();
         void hideEmptyList();
     }

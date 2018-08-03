@@ -5,12 +5,6 @@ import android.os.Parcelable;
 
 public class Ingredient implements Parcelable{
 
-    protected Ingredient(Parcel in) {
-        mName = in.readString();
-        mQuantity = in.readFloat();
-        mMeasure = in.readString();
-    }
-
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
         @Override
         public Ingredient createFromParcel(Parcel in) {
@@ -23,18 +17,6 @@ public class Ingredient implements Parcelable{
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(mName);
-        parcel.writeFloat(mQuantity);
-        parcel.writeString(mMeasure);
-    }
-
     private String mName;
     private float mQuantity;
     private String mMeasure;
@@ -43,6 +25,12 @@ public class Ingredient implements Parcelable{
         mQuantity = quantity;
         mMeasure = measure;
         mName = name;
+    }
+
+    protected Ingredient(Parcel in) {
+        mName = in.readString();
+        mQuantity = in.readFloat();
+        mMeasure = in.readString();
     }
 
     public float getQuantity() {
@@ -55,5 +43,17 @@ public class Ingredient implements Parcelable{
 
     public String getName() {
         return mName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mName);
+        parcel.writeFloat(mQuantity);
+        parcel.writeString(mMeasure);
     }
 }

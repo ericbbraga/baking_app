@@ -1,6 +1,5 @@
 package ericbraga.bakingapp.presenter;
 
-import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.presenter.interfaces.RecipeContract;
@@ -36,6 +35,7 @@ public class RecipePresenter<T> implements RecipeContract.Presenter<T>,
     public void onSuccess(T image) {
         mView.display(image);
         mView.setTitleRecipe(mRecipe.getName());
+        mView.configureStarred(mRecipe.isStarred());
         mView.hideProgress();
         detachView();
     }

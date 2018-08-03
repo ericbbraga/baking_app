@@ -13,5 +13,6 @@ public interface RecipeContract<T> {
         void display(T image);
         void showError(String error);
         void hideProgress();
+        void configureStarred(boolean starred);
     }
 }

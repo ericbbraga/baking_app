@@ -2,10 +2,8 @@ package ericbraga.bakingapp.interactor.implementation;
 
 import java.util.List;
 
-import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 import ericbraga.bakingapp.interactor.interfaces.RecipeDisplayInteractor;
-import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.Step;
 

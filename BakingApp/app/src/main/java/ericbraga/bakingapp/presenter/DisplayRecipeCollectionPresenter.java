@@ -1,9 +1,6 @@
 package ericbraga.bakingapp.presenter;
 
-import android.media.MediaRouter;
-
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
-import ericbraga.bakingapp.environment.common.repositories.local.models.RecipeLocal;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
 import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
@@ -46,6 +43,12 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
     }
 
     @Override
+    public void favoriteItem(Recipe recipe, boolean starred) {
+        recipe.setStarred(starred);
+        mInteractor.changeRecipeStarred(recipe);
+    }
+
+    @Override
     public void onResultReceive(RecipeCollection collection) {
         if (mView != null) {
 
@@ -55,6 +58,11 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
                 mView.display(collection);
             }
         }
+    }
+
+    @Override
+    public void onUpdateRecipe() {
+        // TODO: Make something on View
     }
 
     @Override

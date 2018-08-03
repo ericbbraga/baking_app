@@ -2,7 +2,6 @@ package ericbraga.bakingapp.interactor.implementation;
 
 import ericbraga.bakingapp.interactor.interfaces.StepContentInteractor;
 import ericbraga.bakingapp.interactor.interfaces.StepInteractor;
-import ericbraga.bakingapp.environment.common.repositories.local.models.StepLocal;
 import ericbraga.bakingapp.model.Step;
 
 public class LoadStepsFurtherInfo<T> implements StepContentInteractor<T>,StepInteractor.Callback<T> {
