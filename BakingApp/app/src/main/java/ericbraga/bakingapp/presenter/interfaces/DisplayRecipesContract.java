@@ -17,9 +17,9 @@ public interface DisplayRecipesContract {
     interface View {
         void display(RecipeCollection recipes);
         void showError(String message);
-        void clearFavoriteItem();
         void showEmptyList();
         void hideEmptyList();
+        void updateRecipeStatus(Recipe recipe);
     }
 
     interface Router {

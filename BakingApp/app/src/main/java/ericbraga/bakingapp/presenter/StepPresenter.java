@@ -2,7 +2,7 @@ package ericbraga.bakingapp.presenter;
 
 import java.util.List;
 
-import ericbraga.bakingapp.interactor.interfaces.ExternalMediaContract;
+import ericbraga.bakingapp.presenter.interfaces.ExternalMediaContract;
 import ericbraga.bakingapp.interactor.interfaces.StepContentInteractor;
 import ericbraga.bakingapp.model.Step;
 import ericbraga.bakingapp.presenter.interfaces.DisplayStepContract;
@@ -66,7 +66,7 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
 
     private void loadStepContent() {
         mCurrentStep = mSteps.get(mCurrentStepIndex);
-        mStepContentInteractor.loadInternalStepInformation(mCurrentStep, this);
+        mStepContentInteractor.execute(mCurrentStep, this);
     }
 
     @Override

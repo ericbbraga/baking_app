@@ -45,6 +45,17 @@ public class RecipesCardAdapter extends RecyclerView.Adapter<RecipesCardAdapter.
         mCallback = handler;
     }
 
+    public void updateRecipeOnCollection(Recipe recipe) {
+        if (mCollection.hasRecipe(recipe)) {
+            mCollection.updateRecipe(recipe);
+
+            int position = mCollection.getPosition(recipe.getId());
+            if (position >= 0) {
+                notifyItemChanged(position);
+            }
+        }
+    }
+
     @NonNull
     @Override
     public RecipesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

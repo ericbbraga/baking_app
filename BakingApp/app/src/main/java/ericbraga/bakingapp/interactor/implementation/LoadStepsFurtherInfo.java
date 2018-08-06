@@ -13,13 +13,13 @@ public class LoadStepsFurtherInfo<T> implements StepContentInteractor<T>,StepInt
     }
 
     @Override
-    public void loadInternalStepInformation(Step step, Callback<T> callback) {
+    public void execute(Step step, Callback<T> callback) {
         mOuterCallback = callback;
 
         if (step.getVideoUrl() != null && !step.getVideoUrl().isEmpty()) {
             mOuterCallback.onSuccessLoadVideo(step.getVideoUrl());
         } else  {
-            mStepInteractor.loadStepInformation(step, this);
+            mStepInteractor.execute(step, this);
         }
     }
 

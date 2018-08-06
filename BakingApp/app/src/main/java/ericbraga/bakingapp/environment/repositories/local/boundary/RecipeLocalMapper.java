@@ -3,9 +3,7 @@ package ericbraga.bakingapp.environment.repositories.local.boundary;
 import java.util.ArrayList;
 import java.util.List;
 
-import ericbraga.bakingapp.environment.repositories.local.models.IngredientLocal;
 import ericbraga.bakingapp.environment.repositories.local.models.RecipeLocal;
-import ericbraga.bakingapp.environment.repositories.local.models.StepLocal;
 import ericbraga.bakingapp.environment.repositories.local.models.entity.IngredientEntity;
 import ericbraga.bakingapp.environment.repositories.local.models.entity.StepEntity;
 import ericbraga.bakingapp.model.Ingredient;

@@ -37,7 +37,7 @@ public class GlideLoader implements ImageRepository<Drawable> {
         @Override
         public boolean onLoadFailed(@Nullable GlideException e, Object model,
                                     Target<Drawable> target, boolean isFirstResource) {
-            mCallback.onError("Could not load image: " + e.getMessage());
+            mCallback.onError("Could not execute image: " + e.getMessage());
             return false;
         }
 

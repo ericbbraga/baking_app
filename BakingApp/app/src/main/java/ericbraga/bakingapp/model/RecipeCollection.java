@@ -40,7 +40,7 @@ public class RecipeCollection {
         mRecipes.clear();
     }
 
-    public Recipe getRecipeById(int recipeId) {
+    public Recipe getRecipeById(long recipeId) {
         for (Recipe recipe : mRecipes) {
             if (recipe.getId() == recipeId) {
                 return recipe;
@@ -48,5 +48,32 @@ public class RecipeCollection {
         }
 
         return null;
+    }
+
+    public boolean hasRecipe(Recipe recipe) {
+        return mRecipes.contains(recipe);
+    }
+
+    public void updateRecipe(Recipe recipe) {
+        for (int i = 0; i < mRecipes.size(); i++) {
+            Recipe recipeSwap = mRecipes.get(i);
+
+            if (recipe.equals(recipeSwap)) {
+                mRecipes.set(i, recipe);
+                break;
+            }
+        }
+    }
+
+    public int getPosition(long recipeId) {
+        for (int i = 0; i < mRecipes.size(); i++) {
+            Recipe recipe = mRecipes.get(i);
+
+            if (recipe.getId() == recipeId) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

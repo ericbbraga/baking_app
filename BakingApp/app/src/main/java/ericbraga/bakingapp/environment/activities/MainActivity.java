@@ -8,11 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import ericbraga.bakingapp.R;
 import ericbraga.bakingapp.environment.fragments.ListRecipesFragment;
 import ericbraga.bakingapp.environment.interfaces.AsyncWriteRepository;
-import ericbraga.bakingapp.environment.interfaces.WriteRepository;
 import ericbraga.bakingapp.environment.repositories.RepositoryFactory;
-import ericbraga.bakingapp.interactor.implementation.RecipeInteractorImplementation;
+import ericbraga.bakingapp.interactor.implementation.ChangeRecipeFavorite;
+import ericbraga.bakingapp.interactor.implementation.ChangeStatusInteractor;
+import ericbraga.bakingapp.interactor.implementation.GetFavoriteRecipe;
+import ericbraga.bakingapp.interactor.implementation.LoadRecipes;
+import ericbraga.bakingapp.interactor.implementation.NotifyChanges;
 import ericbraga.bakingapp.interactor.interfaces.AsyncReadRepository;
+import ericbraga.bakingapp.interactor.interfaces.FavoriteRecipeInteractor;
+import ericbraga.bakingapp.interactor.interfaces.NotifyChangesInteractor;
+import ericbraga.bakingapp.interactor.interfaces.RecipeFavoriteInteractor;
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
+import ericbraga.bakingapp.interactor.interfaces.UpdateStatusInteractor;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.presenter.DisplayRecipeCollectionPresenter;
 import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
@@ -35,12 +42,19 @@ public class MainActivity extends AppCompatActivity implements DisplayRecipesCon
 
     private void initPresenter() {
         AsyncReadRepository repository = RepositoryFactory.getRepository(this, WEB_URL);
-        WriteRepository writeRepository = RepositoryFactory.getWriteRepository(this);
+        AsyncWriteRepository writeRepository = RepositoryFactory.getWriteRepository(this);
+        NotifyChangesInteractor notifyChanges = new NotifyChanges(this);
+        RecipeInteractor recipeInteractor = new LoadRecipes(repository);
 
-        RecipeInteractor recipeInteractor =
-                new RecipeInteractorImplementation(repository, writeRepository);
+        FavoriteRecipeInteractor favoriteInteractor = new GetFavoriteRecipe(repository);
+        UpdateStatusInteractor updateStatusInteractor =
+                new ChangeStatusInteractor(writeRepository, notifyChanges);
 
-        mPresenter = new DisplayRecipeCollectionPresenter(this, recipeInteractor);
+        RecipeFavoriteInteractor recipeFavoriteInteractor =
+                new ChangeRecipeFavorite(updateStatusInteractor, favoriteInteractor);
+
+        mPresenter = new DisplayRecipeCollectionPresenter(this, recipeInteractor,
+                recipeFavoriteInteractor);
     }
 
     private void initFragment() {

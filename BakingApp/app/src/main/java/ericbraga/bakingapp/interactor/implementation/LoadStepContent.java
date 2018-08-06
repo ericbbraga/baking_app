@@ -14,7 +14,7 @@ public class LoadStepContent<T> implements StepInteractor<T>, ImageRepository.Im
     }
 
     @Override
-    public void loadStepInformation(Step step, Callback<T> callback) {
+    public void execute(Step step, Callback<T> callback) {
         mOuterCallback = callback;
 
         String background = getBackground(step);

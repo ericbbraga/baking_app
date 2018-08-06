@@ -88,4 +88,19 @@ public class Recipe implements Parcelable {
         dest.writeTypedList(mSteps);
         dest.writeByte((byte) (mStarred ? 1 : 0));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Recipe recipe = (Recipe) o;
+
+        return mId == recipe.mId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (mId ^ (mId >>> 32));
+    }
 }

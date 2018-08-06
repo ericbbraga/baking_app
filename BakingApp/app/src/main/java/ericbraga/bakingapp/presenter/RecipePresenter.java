@@ -28,7 +28,7 @@ public class RecipePresenter<T> implements RecipeContract.Presenter<T>,
 
     private void loadImage() {
         mView.showProgress();
-        mInteractor.loadRecipeInformation(mRecipe, this);
+        mInteractor.execute(mRecipe, this);
     }
 
     @Override

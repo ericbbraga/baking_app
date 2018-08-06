@@ -1,9 +1,8 @@
-package ericbraga.bakingapp.interactor.interfaces;
+package ericbraga.bakingapp.presenter.interfaces;
 
 public interface ExternalMediaContract {
 
     interface Callback {
-
         void onMediaPlayerChangedState(boolean playing);
     }
 

@@ -18,7 +18,7 @@ public class LoadRecipeContents<T> implements RecipeDisplayInteractor<T>,
     }
 
     @Override
-    public void loadRecipeInformation(Recipe recipe, Callback<T> callback) {
+    public void execute(Recipe recipe, Callback<T> callback) {
         mOuterCallback = callback;
 
         String background = getBackground(recipe);

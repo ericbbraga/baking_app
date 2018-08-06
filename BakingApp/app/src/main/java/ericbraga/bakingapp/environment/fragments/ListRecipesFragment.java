@@ -112,11 +112,6 @@ public class ListRecipesFragment extends Fragment implements DisplayRecipesContr
     }
 
     @Override
-    public void clearFavoriteItem() {
-
-    }
-
-    @Override
     public void showEmptyList() {
         runOnUiThread(new Runnable() {
             @Override
@@ -130,6 +125,16 @@ public class ListRecipesFragment extends Fragment implements DisplayRecipesContr
     @Override
     public void hideEmptyList() {
         mNoElementsView.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void updateRecipeStatus(final Recipe recipe) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mRecipesCardAdapter.updateRecipeOnCollection(recipe);
+            }
+        });
     }
 
     private void runOnUiThread(Runnable runnable) {
@@ -147,4 +152,5 @@ public class ListRecipesFragment extends Fragment implements DisplayRecipesContr
     public void favoriteItem(Recipe recipe, boolean starred) {
         mPresenter.favoriteItem(recipe, starred);
     }
+
 }

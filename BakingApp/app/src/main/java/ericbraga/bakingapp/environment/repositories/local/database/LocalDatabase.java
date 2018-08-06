@@ -39,21 +39,16 @@ public class LocalDatabase {
 
             addIngredientsForRecipe(ingredients, recipeId);
             addStepsForRecipe(steps, recipeId);
-
-        } else {
-            update(recipe);
-            recipeId = recipe.getRecipeEntity().getId();
         }
 
         return recipeId;
-
     }
 
     private boolean recipeExists(RecipeLocal recipe) {
         return findRecipeById(recipe.getRecipeEntity().getId()) != null;
     }
 
-    public RecipeLocal findRecipeById(long id) {
+    private RecipeLocal findRecipeById(long id) {
         RecipeIngredientsSteps recipeIngredientsSteps = mDatabase.recipeDao().findRecipeById(id);
         return toRecipeLocal(recipeIngredientsSteps);
     }
@@ -76,13 +71,6 @@ public class LocalDatabase {
         RecipeEntity recipeEntity = recipe.getRecipeEntity();
         List<IngredientEntity> ingredientsEntity = recipe.getIngredients();
         List<StepEntity> stepsEntity = recipe.getSteps();
-
-        RecipeLocal recipeLocal = findRecipeById(recipeEntity.getId());
-
-        if (recipeLocal == null) {
-            recipeEntity.setStarred(recipeLocal.getRecipeEntity().isStarred());
-
-        }
 
         mDatabase.recipeDao().update(recipeEntity);
         mDatabase.ingredientDao().update(ingredientsEntity);

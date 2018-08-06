@@ -20,7 +20,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import ericbraga.bakingapp.environment.interfaces.PlayerViewContract;
-import ericbraga.bakingapp.interactor.interfaces.ExternalMediaContract;
+import ericbraga.bakingapp.presenter.interfaces.ExternalMediaContract;
 
 public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract {
 

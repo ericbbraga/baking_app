@@ -95,7 +95,7 @@ public class LocalRecipeRepository implements AsyncReadWriteRepository, ReadWrit
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if(callback !=null){
+                if(callback != null){
                     update(recipe);
                     callback.onSave();
                 }

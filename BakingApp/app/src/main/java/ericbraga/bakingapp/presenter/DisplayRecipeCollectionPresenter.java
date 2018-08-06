@@ -1,20 +1,25 @@
 package ericbraga.bakingapp.presenter;
 
+import ericbraga.bakingapp.interactor.interfaces.RecipeFavoriteInteractor;
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
 import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
 
-public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.Presenter, RecipeInteractor.Callback {
+public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.Presenter,
+        RecipeInteractor.Callback, RecipeFavoriteInteractor.Callback {
     private final DisplayRecipesContract.Router mRouter;
     private DisplayRecipesContract.View mView;
 
     private RecipeInteractor mInteractor;
+    private RecipeFavoriteInteractor mRecipeFavoriteInteractor;
 
     public DisplayRecipeCollectionPresenter(DisplayRecipesContract.Router router,
-                                            RecipeInteractor interactor) {
+                                            RecipeInteractor interactor,
+                                            RecipeFavoriteInteractor recipeFavoriteInteractor) {
         mRouter = router;
         mInteractor = interactor;
+        mRecipeFavoriteInteractor = recipeFavoriteInteractor;
     }
 
     @Override
@@ -30,7 +35,7 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
     @Override
     public void onResume() {
         mView.hideEmptyList();
-        mInteractor.load(this);
+        mInteractor.execute(this);
     }
 
     @Override
@@ -44,14 +49,12 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
 
     @Override
     public void favoriteItem(Recipe recipe, boolean starred) {
-        recipe.setStarred(starred);
-        mInteractor.changeRecipeStarred(recipe);
+        mRecipeFavoriteInteractor.execute(recipe, this);
     }
 
     @Override
     public void onResultReceive(RecipeCollection collection) {
         if (mView != null) {
-
             if (collection.size() == 0) {
                 mView.showEmptyList();
             } else {
@@ -61,8 +64,10 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
     }
 
     @Override
-    public void onUpdateRecipe() {
-        // TODO: Make something on View
+    public void onUpdateRecipe(Recipe recipe) {
+        if (mView != null) {
+            mView.updateRecipeStatus(recipe);
+        }
     }
 
     @Override
