@@ -1,10 +1,10 @@
 package ericbraga.bakingapp.interactor.implementation;
 
 import ericbraga.bakingapp.interactor.interfaces.AsyncReadRepository;
-import ericbraga.bakingapp.interactor.interfaces.FavoriteRecipeInteractor;
+import ericbraga.bakingapp.interactor.interfaces.GetFavoriteRecipeInteractor;
 import ericbraga.bakingapp.model.Recipe;
 
-public class GetFavoriteRecipe implements FavoriteRecipeInteractor {
+public class GetFavoriteRecipe implements GetFavoriteRecipeInteractor {
     private final AsyncReadRepository mReadRepository;
 
     public GetFavoriteRecipe(AsyncReadRepository readRepository) {

@@ -45,10 +45,14 @@ public class ProxyRecipeReadRepository implements AsyncReadRepository {
                 mOutsideCallback.listRecipesContent(recipes);
             }
 
-            if (mNetworkManager.hasConnection()) {
+            if (mNetworkManager.hasConnection()){
                 mWebReadRepository.listRecipes(new WebCallback());
+
+            } else if (!loadRecipes) {
+                mOutsideCallback.listRecipesContent(RecipeCollection.emptyCollection());
             }
         }
+
         @Override
         public void errorMessage(String message) {
             mOutsideCallback.errorMessage(message);

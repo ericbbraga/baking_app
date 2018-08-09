@@ -8,6 +8,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".environment.application.App"
         android:icon="@drawable/dessert"
         android:label="@string/app_name"
         android:roundIcon="@drawable/dessert"

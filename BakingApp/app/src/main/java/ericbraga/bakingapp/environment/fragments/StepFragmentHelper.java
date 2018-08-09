@@ -7,7 +7,7 @@ import java.util.List;
 
 import ericbraga.bakingapp.R;
 import ericbraga.bakingapp.environment.controllers.AndroidPlayer;
-import ericbraga.bakingapp.environment.repositories.GlideLoader;
+import ericbraga.bakingapp.environment.repositories.image.GlideLoader;
 import ericbraga.bakingapp.interactor.implementation.LoadStepContent;
 import ericbraga.bakingapp.interactor.implementation.LoadStepsFurtherInfo;
 import ericbraga.bakingapp.interactor.interfaces.ImageRepository;

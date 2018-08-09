@@ -1,6 +1,7 @@
-package ericbraga.bakingapp.environment.repositories;
+package ericbraga.bakingapp.environment.repositories.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
 import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
@@ -23,6 +25,7 @@ public class GlideLoader implements ImageRepository<Drawable> {
 
         Glide.with(mContext)
                 .load(uri)
+                .apply(RequestOptions.encodeFormatOf(Bitmap.CompressFormat.JPEG))
                 .listener(new GlideRepositoryListener(callback))
                 .submit();
     }

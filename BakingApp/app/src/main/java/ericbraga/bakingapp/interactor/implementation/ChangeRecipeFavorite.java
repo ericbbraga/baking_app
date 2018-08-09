@@ -1,24 +1,24 @@
 package ericbraga.bakingapp.interactor.implementation;
 
-import ericbraga.bakingapp.interactor.interfaces.FavoriteRecipeInteractor;
-import ericbraga.bakingapp.interactor.interfaces.RecipeFavoriteInteractor;
+import ericbraga.bakingapp.interactor.interfaces.GetFavoriteRecipeInteractor;
+import ericbraga.bakingapp.interactor.interfaces.ChangeRecipeFavoriteInteractor;
 import ericbraga.bakingapp.interactor.interfaces.UpdateStatusInteractor;
 import ericbraga.bakingapp.model.Recipe;
 
-public class ChangeRecipeFavorite implements RecipeFavoriteInteractor {
+public class ChangeRecipeFavorite implements ChangeRecipeFavoriteInteractor {
     private final UpdateStatusInteractor mChangeFavoriteRecipeStatus;
-    private final FavoriteRecipeInteractor mGetFavoriteRecipe;
+    private final GetFavoriteRecipeInteractor mGetFavoriteRecipe;
 
     public ChangeRecipeFavorite(UpdateStatusInteractor changeFavoriteRecipeStatus,
-                                FavoriteRecipeInteractor getFavoriteRecipe) {
+                                GetFavoriteRecipeInteractor getFavoriteRecipe) {
         mChangeFavoriteRecipeStatus = changeFavoriteRecipeStatus;
         mGetFavoriteRecipe = getFavoriteRecipe;
     }
 
     @Override
     public void execute(final Recipe favoriteRecipe,
-                        final RecipeFavoriteInteractor.Callback callback) {
-        mGetFavoriteRecipe.execute(new FavoriteRecipeInteractor.Callback() {
+                        final ChangeRecipeFavoriteInteractor.Callback callback) {
+        mGetFavoriteRecipe.execute(new GetFavoriteRecipeInteractor.Callback() {
             @Override
             public void favoriteRecipe(Recipe recipe) {
                 favoriteRecipe.setStarred(true);

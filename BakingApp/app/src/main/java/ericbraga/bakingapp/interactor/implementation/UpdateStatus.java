@@ -1,6 +1,5 @@
 package ericbraga.bakingapp.interactor.implementation;
 
-import android.content.Context;
 import android.util.Log;
 
 import ericbraga.bakingapp.environment.interfaces.AsyncWriteRepository;
@@ -8,12 +7,12 @@ import ericbraga.bakingapp.interactor.interfaces.NotifyChangesInteractor;
 import ericbraga.bakingapp.interactor.interfaces.UpdateStatusInteractor;
 import ericbraga.bakingapp.model.Recipe;
 
-public class ChangeStatusInteractor implements UpdateStatusInteractor {
+public class UpdateStatus implements UpdateStatusInteractor {
     private final NotifyChangesInteractor mNotifyInteractor;
     private AsyncWriteRepository mWriteRepository;
 
-    public ChangeStatusInteractor(AsyncWriteRepository writeRepository,
-                                  NotifyChangesInteractor notifyInteractor) {
+    public UpdateStatus(AsyncWriteRepository writeRepository,
+                        NotifyChangesInteractor notifyInteractor) {
         mWriteRepository = writeRepository;
         mNotifyInteractor = notifyInteractor;
     }
@@ -29,7 +28,7 @@ public class ChangeStatusInteractor implements UpdateStatusInteractor {
 
             @Override
             public void onError(String message) {
-                Log.i("ChangeStatusInteractor", "error " + message);
+                Log.i("UpdateStatus", "error " + message);
             }
         });
 
@@ -37,7 +36,7 @@ public class ChangeStatusInteractor implements UpdateStatusInteractor {
     }
 
     @Override
-    public void execute(Recipe recipe, final ChangeStatusInteractor.Callback callback) {
+    public void execute(Recipe recipe, final UpdateStatus.Callback callback) {
         if (callback != null) {
             mWriteRepository.update(recipe, new AsyncWriteRepository.WriteRepositoryCallback() {
                 @Override

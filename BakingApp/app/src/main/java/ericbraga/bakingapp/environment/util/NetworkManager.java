@@ -16,6 +16,10 @@ public class NetworkManager {
         ConnectivityManager connManager =
                 (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        if (connManager == null) {
+            return false;
+        }
+
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }

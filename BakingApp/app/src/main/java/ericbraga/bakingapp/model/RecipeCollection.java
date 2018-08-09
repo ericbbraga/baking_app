@@ -76,4 +76,8 @@ public class RecipeCollection {
 
         return -1;
     }
+
+    public static RecipeCollection emptyCollection() {
+        return new RecipeCollection();
+    }
 }

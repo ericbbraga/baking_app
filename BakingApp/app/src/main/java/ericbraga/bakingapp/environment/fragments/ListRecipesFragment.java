@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import ericbraga.bakingapp.R;
 import ericbraga.bakingapp.environment.factories.RecipePresenterFactory;
-import ericbraga.bakingapp.environment.repositories.GlideLoader;
+import ericbraga.bakingapp.environment.repositories.image.GlideLoader;
 import ericbraga.bakingapp.environment.view.RecipesCardAdapter;
 import ericbraga.bakingapp.interactor.interfaces.ImageRepository;
 import ericbraga.bakingapp.model.Recipe;
@@ -60,14 +60,12 @@ public class ListRecipesFragment extends Fragment implements DisplayRecipesContr
     }
 
     private void initRecipeAdapter() {
-        // Adapter Objects
         ImageRepository<Drawable> imageRepository = new GlideLoader(mContext);
         RecipePresenterFactory<Drawable> factoryPresenter =
                 new RecipePresenterFactory<>(imageRepository);
 
         mRecipesCardAdapter = new RecipesCardAdapter(factoryPresenter);
         mRecipesCardAdapter.setRecipeCallback(this);
-        // End Adapter Objects
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.environment.repositories.local;
+package ericbraga.bakingapp.junit;
 
 import android.content.Context;
 import android.database.Cursor;

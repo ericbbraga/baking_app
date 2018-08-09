@@ -2,8 +2,8 @@ package ericbraga.bakingapp.interactor.interfaces;
 
 import ericbraga.bakingapp.model.Recipe;
 
-public interface RecipeFavoriteInteractor {
-    void execute(Recipe recipe, RecipeFavoriteInteractor.Callback callback);
+public interface ChangeRecipeFavoriteInteractor {
+    void execute(Recipe recipe, ChangeRecipeFavoriteInteractor.Callback callback);
 
     interface Callback {
         void onUpdateRecipe(Recipe recipe);
