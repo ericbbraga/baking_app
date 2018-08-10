@@ -1,22 +1,22 @@
 package ericbraga.bakingapp.app;
 
 import ericbraga.bakingapp.environment.application.App;
-import ericbraga.bakingapp.environment.injectors.modules.AsyncReadRepositoryModule;
-import ericbraga.bakingapp.environment.injectors.modules.NetworkModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.AsyncReadRepositoryModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.NetworkModule;
 import ericbraga.bakingapp.injectors.RecipeInteractorModuleIdlingResourceModule;
 
 public class MockApp extends App {
 
     public void setNetworkModule (NetworkModule networkModule) {
-        mDaggerMainInjectorBuilder.networkModule(networkModule);
+        mMainDaggerInjectorBuilder.networkModule(networkModule);
     }
 
     public void setAsyncReadRepositoryModule(AsyncReadRepositoryModule repositoryModule) {
-        mDaggerMainInjectorBuilder.asyncReadRepositoryModule(repositoryModule);
+        mMainDaggerInjectorBuilder.asyncReadRepositoryModule(repositoryModule);
     }
 
     public void setRecipeInteractorModule(
         RecipeInteractorModuleIdlingResourceModule recipeInteractorModule) {
-        mDaggerMainInjectorBuilder.recipeInteractorModule(recipeInteractorModule);
+        mMainDaggerInjectorBuilder.recipeInteractorModule(recipeInteractorModule);
     }
 }

@@ -2,7 +2,7 @@ package ericbraga.bakingapp.injectors;
 
 import android.content.Context;
 
-import ericbraga.bakingapp.environment.injectors.modules.NetworkModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.NetworkModule;
 import ericbraga.bakingapp.environment.util.NetworkManager;
 
 public class NetworkModuleWithInvalidConnection extends NetworkModule {

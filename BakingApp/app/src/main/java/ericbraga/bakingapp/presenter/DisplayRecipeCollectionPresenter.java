@@ -8,18 +8,16 @@ import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
 
 public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.Presenter,
         RecipeInteractor.Callback, ChangeRecipeFavoriteInteractor.Callback {
-    private final DisplayRecipesContract.Router mRouter;
+    private DisplayRecipesContract.Router mRouter;
     private DisplayRecipesContract.View mView;
 
     private RecipeInteractor mInteractor;
     private ChangeRecipeFavoriteInteractor mChangeRecipeFavoriteInteractor;
 
-    public DisplayRecipeCollectionPresenter(DisplayRecipesContract.Router router,
-                                            RecipeInteractor interactor,
-                                            ChangeRecipeFavoriteInteractor changeRecipeFavoriteInteractor) {
-        mRouter = router;
+    public DisplayRecipeCollectionPresenter(RecipeInteractor interactor,
+                                            ChangeRecipeFavoriteInteractor favoriteInteractor) {
         mInteractor = interactor;
-        mChangeRecipeFavoriteInteractor = changeRecipeFavoriteInteractor;
+        mChangeRecipeFavoriteInteractor = favoriteInteractor;
     }
 
     @Override
@@ -50,6 +48,11 @@ public class DisplayRecipeCollectionPresenter implements DisplayRecipesContract.
     @Override
     public void favoriteItem(Recipe recipe, boolean starred) {
         mChangeRecipeFavoriteInteractor.execute(recipe, this);
+    }
+
+    @Override
+    public void setRouter(DisplayRecipesContract.Router router) {
+        mRouter = router;
     }
 
     @Override

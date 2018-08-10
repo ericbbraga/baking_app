@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
@@ -14,18 +15,36 @@ import ericbraga.bakingapp.model.Step;
 
 public class StepInformationActivity extends AppCompatActivity {
     private StepInformationFragment mFragment;
+    private ArrayList<Step> mSteps;
+    private int mSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Intent it = getIntent();
 
-        List<Step> steps = it.getParcelableArrayListExtra("steps");
-        final int selected = it.getIntExtra("step_selected", 0);
+        Bundle extraBundle = it.getExtras();
+        if (savedInstanceState != null) {
+            extraBundle = savedInstanceState;
+        }
 
-        configureViews(steps, selected);
+        if (extraBundle != null) {
+            mSteps = extraBundle.getParcelableArrayList("steps");
+            mSelected = extraBundle.getInt("step_selected", 0);
+
+            configureViews(mSteps, mSelected);
+        }
+
         addFragmentIntoScreen();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mSelected = mFragment.getCurrentIndex();
+
+        outState.putParcelableArrayList("steps", mSteps);
+        outState.putInt("step_selected", mSelected);
     }
 
     private void configureViews(List<Step> steps, int selected) {

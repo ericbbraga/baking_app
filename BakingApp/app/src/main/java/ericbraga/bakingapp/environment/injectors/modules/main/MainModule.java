@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.environment.injectors.modules;
+package ericbraga.bakingapp.environment.injectors.modules.main;
 
 import javax.inject.Singleton;
 
@@ -13,10 +13,9 @@ import ericbraga.bakingapp.presenter.interfaces.DisplayRecipesContract;
 public class MainModule {
 
     @Provides @Singleton
-    public DisplayRecipesContract.Presenter providePresenter(
-            DisplayRecipesContract.Router router, RecipeInteractor recipeInteractor,
+    public DisplayRecipesContract.Presenter providePresenter(RecipeInteractor recipeInteractor,
             ChangeRecipeFavoriteInteractor changeRecipeFavoriteInteractor) {
-        return new DisplayRecipeCollectionPresenter(router, recipeInteractor,
+        return new DisplayRecipeCollectionPresenter(recipeInteractor,
                 changeRecipeFavoriteInteractor);
     }
 }

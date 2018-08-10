@@ -1,4 +1,4 @@
-package ericbraga.bakingapp.environment.injectors.modules;
+package ericbraga.bakingapp.environment.injectors.modules.common;
 
 import dagger.Module;
 import dagger.Provides;

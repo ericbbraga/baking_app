@@ -34,7 +34,7 @@ public class DescriptionFragment extends Fragment
     public void setPresenter(DescriptionRecipeContract.Presenter presenter) {
         mPresenter = presenter;
         mPresenter.attachView(this);
-    }
+     }
 
     @Nullable
     @Override
@@ -99,6 +99,8 @@ public class DescriptionFragment extends Fragment
 
     @Override
     public void onClickItem(int position) {
-        mPresenter.showMoreSteps(position);
+        if (mPresenter != null) {
+            mPresenter.showMoreSteps(position);
+        }
     }
 }

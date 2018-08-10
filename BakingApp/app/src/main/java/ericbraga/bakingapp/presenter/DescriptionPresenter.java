@@ -8,14 +8,23 @@ import ericbraga.bakingapp.model.Step;
 import ericbraga.bakingapp.presenter.interfaces.DescriptionRecipeContract;
 
 public class DescriptionPresenter implements DescriptionRecipeContract.Presenter {
-    private final Recipe mRecipe;
-    private final DescriptionRecipeContract.Router mRouter;
+    private DescriptionRecipeContract.Router mRouter;
+    private Recipe mRecipe;
     private DescriptionRecipeContract.View mView;
 
-    public DescriptionPresenter(DescriptionRecipeContract.Router router,
-                                Recipe recipe) {
-        mRouter = router;
+    @Override
+    public void configureRecipe(Recipe recipe) {
         mRecipe = recipe;
+    }
+
+    @Override
+    public void setRecipe(Recipe recipe) {
+        mRecipe = recipe;
+    }
+
+    @Override
+    public void setRouter(DescriptionRecipeContract.Router router){
+        mRouter = router;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class DescriptionPresenter implements DescriptionRecipeContract.Presenter
 
     @Override
     public void onResume() {
-        if (mView != null) {
+        if (hasValidConfig()) {
             setRecipeName(mRecipe.getName());
             loadIngredients();
             loadSteps();
@@ -44,26 +53,32 @@ public class DescriptionPresenter implements DescriptionRecipeContract.Presenter
     }
 
     private void loadIngredients() {
-        if (mView != null) {
+        if (hasValidConfig()) {
             List<Ingredient> ingredients = mRecipe.getIngredients();
             mView.showIngredients(ingredients);
         }
     }
 
     private void loadSteps() {
-        if (mView != null) {
+        if (hasValidConfig()) {
             List<Step> steps = mRecipe.getSteps();
             mView.showSteps(steps);
         }
     }
 
     @Override
-    public void onPause() {
+    public void showMoreSteps(int position) {
+        if (hasValidConfig()) {
+            mRouter.showMoreStepInfo(mRecipe.getSteps(), position);
+        }
+    }
 
+    private boolean hasValidConfig() {
+        return mView != null && mRecipe != null && mRouter != null;
     }
 
     @Override
-    public void showMoreSteps(int position) {
-        mRouter.showMoreStepInfo(mRecipe.getSteps(), position);
+    public void onPause() {
+
     }
 }

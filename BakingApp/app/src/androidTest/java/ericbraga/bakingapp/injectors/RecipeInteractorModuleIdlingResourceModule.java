@@ -2,9 +2,8 @@ package ericbraga.bakingapp.injectors;
 
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.idling.CountingIdlingResource;
-import android.util.Log;
 
-import ericbraga.bakingapp.environment.injectors.modules.RecipeInteractorModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.RecipeInteractorModule;
 import ericbraga.bakingapp.interactor.implementation.LoadRecipes;
 import ericbraga.bakingapp.interactor.interfaces.AsyncReadRepository;
 import ericbraga.bakingapp.interactor.interfaces.RecipeInteractor;

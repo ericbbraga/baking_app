@@ -4,17 +4,16 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ericbraga.bakingapp.environment.activities.MainActivity;
-import ericbraga.bakingapp.environment.injectors.modules.AsyncReadRepositoryModule;
-import ericbraga.bakingapp.environment.injectors.modules.AsyncWriteRepositoryModule;
-import ericbraga.bakingapp.environment.injectors.modules.ChangeRecipeFavorteInteractorModule;
-import ericbraga.bakingapp.environment.injectors.modules.FavoriteRecipeInteractorModule;
-import ericbraga.bakingapp.environment.injectors.modules.MainModule;
-import ericbraga.bakingapp.environment.injectors.modules.MainRouterModule;
-import ericbraga.bakingapp.environment.injectors.modules.NetworkModule;
-import ericbraga.bakingapp.environment.injectors.modules.NotifyModule;
-import ericbraga.bakingapp.environment.injectors.modules.RecipeInteractorModule;
-import ericbraga.bakingapp.environment.injectors.modules.UpdateStatusModule;
-import ericbraga.bakingapp.environment.injectors.modules.WebUrlModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.AsyncReadRepositoryModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.AsyncWriteRepositoryModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.ChangeRecipeFavorteInteractorModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.FavoriteRecipeInteractorModule;
+import ericbraga.bakingapp.environment.injectors.modules.main.MainModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.NetworkModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.NotifyModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.RecipeInteractorModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.UpdateStatusModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.WebUrlModule;
 
 @Component(
         modules = {
@@ -23,7 +22,6 @@ import ericbraga.bakingapp.environment.injectors.modules.WebUrlModule;
                 ChangeRecipeFavorteInteractorModule.class,
                 FavoriteRecipeInteractorModule.class,
                 MainModule.class,
-                MainRouterModule.class,
                 NetworkModule.class,
                 NotifyModule.class,
                 WebUrlModule.class,

@@ -6,38 +6,53 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ericbraga.bakingapp.R;
+import ericbraga.bakingapp.environment.application.App;
 import ericbraga.bakingapp.environment.fragments.DescriptionFragment;
 import ericbraga.bakingapp.environment.fragments.EmptyFragment;
 import ericbraga.bakingapp.environment.fragments.StepFragmentHelper;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.Step;
-import ericbraga.bakingapp.presenter.DescriptionPresenter;
 import ericbraga.bakingapp.presenter.interfaces.DescriptionRecipeContract;
 
 public class DescriptionRecipeActivity extends AppCompatActivity implements
         DescriptionRecipeContract.Router {
 
-    private DescriptionRecipeContract.Presenter mPresenter;
+    @Inject
+    DescriptionRecipeContract.Presenter mPresenter;
+
     private Fragment mCurrentDetailFragment;
     private DescriptionFragment mDescriptionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Recipe recipe = (Recipe) getIntent().getExtras().get("recipe");
+
+        Intent it = getIntent();
+        Recipe recipe = null;
+
+        if (it != null) {
+            Bundle bundle = it.getExtras();
+            if (bundle != null) {
+                recipe = (Recipe) bundle.get("recipe");
+            }
+        }
+
+        ((App) getApplication()).inject(this);
 
         configurePresenter(recipe);
         configureViews();
     }
 
     private void configurePresenter(Recipe recipe) {
-        mPresenter = new DescriptionPresenter(this, recipe);
+        mPresenter.setRecipe(recipe);
+        mPresenter.setRouter(this);
     }
 
     private void configureViews() {
@@ -64,9 +79,19 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
         }
     }
 
-    private boolean shouldShowDetailFragment() {
-        View detailFragment = findViewById(R.id.detail_description_part);
-        return detailFragment != null;
+    @Override
+    public void showMoreStepInfo(List<Step> steps, int position) {
+        if (shouldShowDetailFragment()) {
+            StepFragmentHelper helper = new StepFragmentHelper(this, steps, position);
+            mCurrentDetailFragment = helper.createStepFragment();
+            updateFragment();
+
+        } else {
+            Intent it = new Intent(this, StepInformationActivity.class);
+            it.putExtra("steps", new ArrayList<>(steps));
+            it.putExtra("step_selected", position);
+            startActivity(it);
+        }
     }
 
     private void updateFragment() {
@@ -81,24 +106,13 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
         transaction.commit();
     }
 
+    private boolean shouldShowDetailFragment() {
+        return getResources().getBoolean(R.bool.should_show_detail_fragment);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         mPresenter.onResume();
-    }
-
-    @Override
-    public void showMoreStepInfo(List<Step> steps, int position) {
-        if (shouldShowDetailFragment()) {
-            StepFragmentHelper helper = new StepFragmentHelper(this, steps, position);
-            mCurrentDetailFragment = helper.createStepFragment();
-            updateFragment();
-
-        } else {
-            Intent it = new Intent(this, StepInformationActivity.class);
-            it.putExtra("steps", new ArrayList<>(steps));
-            it.putExtra("step_selected", position);
-            startActivity(it);
-        }
     }
 }

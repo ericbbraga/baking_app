@@ -4,6 +4,9 @@ public interface DisplayStepContract {
     interface Presenter<T> {
         void attachView(DisplayStepContract.View<T> view);
         void onResume();
+
+        int getCurrentStepIndex();
+
         void nextStepWidgetClicked();
         void previousStepWidgetClicked();
         void detach();

@@ -2,7 +2,7 @@ package ericbraga.bakingapp.injectors;
 
 import android.content.Context;
 
-import ericbraga.bakingapp.environment.injectors.modules.AsyncReadRepositoryModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.AsyncReadRepositoryModule;
 import ericbraga.bakingapp.environment.repositories.local.repositories.LocalRecipeRepository;
 import ericbraga.bakingapp.environment.util.NetworkManager;
 import ericbraga.bakingapp.interactor.interfaces.AsyncReadRepository;

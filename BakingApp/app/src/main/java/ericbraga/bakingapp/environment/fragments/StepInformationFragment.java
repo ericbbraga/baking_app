@@ -91,6 +91,10 @@ public class StepInformationFragment extends Fragment
         mPresenter.attachView(this);
     }
 
+    public int getCurrentIndex() {
+        return mPresenter.getCurrentStepIndex();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

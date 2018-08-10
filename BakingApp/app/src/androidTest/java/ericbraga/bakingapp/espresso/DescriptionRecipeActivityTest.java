@@ -49,7 +49,7 @@ public class DescriptionRecipeActivityTest {
     }
 
     @Test
-    public void click_on_step_should_open_new_activity() {
+    public void click_on_step_should_open_activity() {
         Espresso.onView(
             ViewMatchers.withId(R.id.description_ingredients_title)
         ).check(

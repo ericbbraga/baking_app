@@ -39,6 +39,11 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
     }
 
     @Override
+    public int getCurrentStepIndex() {
+        return mCurrentStepIndex;
+    }
+
+    @Override
     public void nextStepWidgetClicked() {
         if (hasNextStep()) {
             mCurrentStepIndex = mCurrentStepIndex + 1;
