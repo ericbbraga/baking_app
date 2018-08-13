@@ -134,7 +134,6 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
                 mView.disableNextWidget();
             }
         }
-
     }
 
     private boolean hasNextStep() {

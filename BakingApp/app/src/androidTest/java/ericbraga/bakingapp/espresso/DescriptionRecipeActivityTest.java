@@ -2,6 +2,7 @@ package ericbraga.bakingapp.espresso;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
@@ -21,31 +22,26 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ericbraga.bakingapp.R;
-import ericbraga.bakingapp.app.MockApp;
-import ericbraga.bakingapp.environment.activities.MainActivity;
+import ericbraga.bakingapp.environment.activities.DescriptionRecipeActivity;
 import ericbraga.bakingapp.environment.activities.StepInformationActivity;
-import ericbraga.bakingapp.injectors.RecipeInteractorModuleIdlingResourceModule;
+import ericbraga.bakingapp.espresso.util.RecipeMockFactory;
+import ericbraga.bakingapp.model.Recipe;
 
 @RunWith(AndroidJUnit4.class)
 public class DescriptionRecipeActivityTest {
 
     @Rule
-    public IntentsTestRule<MainActivity> mActivityTestRule =
-        new IntentsTestRule<>(MainActivity.class, true, false);
+    public IntentsTestRule<DescriptionRecipeActivity> mActivityTestRule =
+        new IntentsTestRule<>(DescriptionRecipeActivity.class, true, false);
 
     @Before
     public void setUp() {
-        MockApp mockApp = (MockApp) InstrumentationRegistry.getInstrumentation()
-            .getTargetContext().getApplicationContext();
+        Recipe recipe = RecipeMockFactory.createMockRecipe();
 
-        mockApp.setRecipeInteractorModule(new RecipeInteractorModuleIdlingResourceModule());
-        mActivityTestRule.launchActivity(null);
+        Intent it = new Intent();
+        it.putExtra(DescriptionRecipeActivity.RECIPE_BUNBLE_KEY, recipe);
 
-        Espresso.onView(
-            ViewMatchers.withId(R.id.baking_list)
-        ).perform(
-            RecyclerViewActions.actionOnItemAtPosition(0, ViewActions.click())
-        );
+        mActivityTestRule.launchActivity(it);
     }
 
     @Test
@@ -74,8 +70,8 @@ public class DescriptionRecipeActivityTest {
                         StepInformationActivity.class
                     )
                 ),
-                IntentMatchers.hasExtraWithKey("steps"),
-                IntentMatchers.hasExtraWithKey("step_selected")
+                IntentMatchers.hasExtraWithKey(StepInformationActivity.STEPS_BUNBLE_KEY),
+                IntentMatchers.hasExtraWithKey(StepInformationActivity.STEP_SELECTED_BUNBLE_KEY)
             )
         );
     }

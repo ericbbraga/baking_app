@@ -12,6 +12,7 @@ import java.util.List;
 
 import ericbraga.bakingapp.environment.interfaces.Parser;
 import ericbraga.bakingapp.environment.repositories.exception.ParserException;
+import ericbraga.bakingapp.environment.repositories.web.models.RecipeWeb;
 
 public class JsonWebParserTest {
 
@@ -83,12 +84,28 @@ public class JsonWebParserTest {
 
         try {
             RecipeWebCollection recipes = parser.parse(sb.toString());
-            if (recipes.recipesValid()) {
+            if (recipesValid(recipes)) {
                 Assert.fail();
             }
         } catch(ParserException e) {
             Assert.fail();
         }
+    }
+
+    private boolean recipesValid(RecipeWebCollection recipeWebCollection) {
+        boolean valid = true;
+        List<RecipeWeb> recipes = recipeWebCollection.getRecipes();
+
+        for (RecipeWeb recipe : recipes) {
+            if (recipe.getName() == null ||
+                recipe.getStepWebs() == null ||
+                recipe.getIngredientWeb() == null) {
+                valid = false;
+                break;
+            }
+        }
+
+        return valid;
     }
 
 }

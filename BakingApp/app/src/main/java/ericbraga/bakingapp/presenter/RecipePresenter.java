@@ -42,7 +42,7 @@ public class RecipePresenter<T> implements RecipeContract.Presenter<T>,
 
     @Override
     public void displayFallbackImage() {
-        // TODO: Display Fallback Image
+        mView.displayFallbackImage();
     }
 
     @Override

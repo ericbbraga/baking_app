@@ -14,6 +14,8 @@ import ericbraga.bakingapp.environment.fragments.StepInformationFragment;
 import ericbraga.bakingapp.model.Step;
 
 public class StepInformationActivity extends AppCompatActivity {
+    public static final String STEPS_BUNBLE_KEY = "steps";
+    public static final String STEP_SELECTED_BUNBLE_KEY = "step_selected";
     private StepInformationFragment mFragment;
     private ArrayList<Step> mSteps;
     private int mSelected;
@@ -29,8 +31,8 @@ public class StepInformationActivity extends AppCompatActivity {
         }
 
         if (extraBundle != null) {
-            mSteps = extraBundle.getParcelableArrayList("steps");
-            mSelected = extraBundle.getInt("step_selected", 0);
+            mSteps = extraBundle.getParcelableArrayList(STEPS_BUNBLE_KEY);
+            mSelected = extraBundle.getInt(STEP_SELECTED_BUNBLE_KEY, 0);
 
             configureViews(mSteps, mSelected);
         }

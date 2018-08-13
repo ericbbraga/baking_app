@@ -25,41 +25,40 @@ public class RecipeWebMapper {
 
     @NonNull
     private List<Ingredient> getIngredientsFrom(RecipeWeb recipeWeb) {
-        Iterator<IngredientWeb> iteratorIngredient = recipeWeb.getIngredientWeb();
+        List<IngredientWeb> webIngredients = recipeWeb.getIngredientWeb();
         List<Ingredient> ingredients = new ArrayList<>();
 
-        while (iteratorIngredient.hasNext()) {
-            IngredientWeb ingredientWeb = iteratorIngredient.next();
 
+        for (IngredientWeb webIngredient : webIngredients) {
             Ingredient ingredient = new Ingredient(
-                    ingredientWeb.getName(),
-                    ingredientWeb.getQuantity(),
-                    ingredientWeb.getMeasure()
+                webIngredient.getName(),
+                webIngredient.getQuantity(),
+                webIngredient.getMeasure()
             );
 
             ingredients.add(ingredient);
         }
+
         return ingredients;
     }
 
     @NonNull
     private List<Step> getStepsFrom(RecipeWeb recipeWeb) {
-        Iterator<StepWeb> iteratorSteps = recipeWeb.getStepWebs();
+        List<StepWeb> webSteps = recipeWeb.getStepWebs();
         List<Step> steps = new ArrayList<>();
 
-        while (iteratorSteps.hasNext()) {
-            StepWeb stepWeb = iteratorSteps.next();
-
+        for (StepWeb webStep : webSteps) {
             Step step = new Step(
-                    stepWeb.id(),
-                    stepWeb.getShortDescription(),
-                    stepWeb.getDescription(),
-                    stepWeb.getVideoUrl(),
-                    stepWeb.getThumbnailUrl()
+                webStep.id(),
+                webStep.getShortDescription(),
+                webStep.getDescription(),
+                webStep.getVideoUrl(),
+                webStep.getThumbnailUrl()
             );
 
             steps.add(step);
         }
+
         return steps;
     }
 }

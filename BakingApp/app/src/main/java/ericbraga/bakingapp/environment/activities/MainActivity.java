@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements DisplayRecipesCon
     @Override
     public void displayNextScreen(Recipe recipe) {
         Intent intent = new Intent(this, DescriptionRecipeActivity.class);
-        intent.putExtra("recipe", recipe);
+        intent.putExtra(DescriptionRecipeActivity.RECIPE_BUNBLE_KEY, recipe);
         startActivity(intent);
     }
 }

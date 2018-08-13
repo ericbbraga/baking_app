@@ -163,5 +163,10 @@ public class RecipesCardAdapter extends RecyclerView.Adapter<RecipesCardAdapter.
         public void configureStarred(boolean starred) {
             mStarImageView.setChecked(starred);
         }
+
+        @Override
+        public void displayFallbackImage() {
+            mRecipesImageView.setImageResource(R.drawable.dessert);
+        }
     }
 }

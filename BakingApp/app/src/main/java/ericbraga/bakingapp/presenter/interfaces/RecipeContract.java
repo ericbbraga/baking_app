@@ -14,5 +14,6 @@ public interface RecipeContract<T> {
         void showError(String error);
         void hideProgress();
         void configureStarred(boolean starred);
+        void displayFallbackImage();
     }
 }

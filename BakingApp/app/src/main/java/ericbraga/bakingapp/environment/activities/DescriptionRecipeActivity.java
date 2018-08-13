@@ -24,6 +24,8 @@ import ericbraga.bakingapp.presenter.interfaces.DescriptionRecipeContract;
 public class DescriptionRecipeActivity extends AppCompatActivity implements
         DescriptionRecipeContract.Router {
 
+    public static final String RECIPE_BUNBLE_KEY = "recipe";
+
     @Inject
     DescriptionRecipeContract.Presenter mPresenter;
 
@@ -40,7 +42,7 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
         if (it != null) {
             Bundle bundle = it.getExtras();
             if (bundle != null) {
-                recipe = (Recipe) bundle.get("recipe");
+                recipe = (Recipe) bundle.get(RECIPE_BUNBLE_KEY);
             }
         }
 
@@ -88,8 +90,8 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
 
         } else {
             Intent it = new Intent(this, StepInformationActivity.class);
-            it.putExtra("steps", new ArrayList<>(steps));
-            it.putExtra("step_selected", position);
+            it.putExtra(StepInformationActivity.STEPS_BUNBLE_KEY, new ArrayList<>(steps));
+            it.putExtra(StepInformationActivity.STEP_SELECTED_BUNBLE_KEY, position);
             startActivity(it);
         }
     }

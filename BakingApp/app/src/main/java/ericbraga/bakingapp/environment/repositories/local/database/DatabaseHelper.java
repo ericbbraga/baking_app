@@ -125,7 +125,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        // TODO: Delete All Tables
         onCreate(sqLiteDatabase);
     }
 }

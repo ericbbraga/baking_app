@@ -65,7 +65,7 @@ public class MainActivityTest {
                         DescriptionRecipeActivity.class
                     )
                 ),
-                IntentMatchers.hasExtraWithKey("recipe")
+                IntentMatchers.hasExtraWithKey(DescriptionRecipeActivity.RECIPE_BUNBLE_KEY)
             )
         );
     }

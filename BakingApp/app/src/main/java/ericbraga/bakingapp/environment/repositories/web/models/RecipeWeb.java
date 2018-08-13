@@ -32,11 +32,11 @@ public class RecipeWeb {
         return mName;
     }
 
-    public Iterator<IngredientWeb> getIngredientWeb() {
-        return mIngredientWeb.iterator();
+    public List<IngredientWeb> getIngredientWeb() {
+        return mIngredientWeb;
     }
 
-    public Iterator<StepWeb> getStepWebs() {
-        return mStepWebs.iterator();
+    public List<StepWeb> getStepWebs() {
+        return mStepWebs;
     }
 }

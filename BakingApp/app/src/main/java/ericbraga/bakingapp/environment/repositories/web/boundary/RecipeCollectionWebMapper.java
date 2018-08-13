@@ -1,6 +1,7 @@
 package ericbraga.bakingapp.environment.repositories.web.boundary;
 
 import java.util.Iterator;
+import java.util.List;
 
 import ericbraga.bakingapp.environment.repositories.web.RecipeWebCollection;
 import ericbraga.bakingapp.environment.repositories.web.models.RecipeWeb;
@@ -17,10 +18,9 @@ public class RecipeCollectionWebMapper {
 
     public RecipeCollection fromWebRecipe(RecipeWebCollection recipeWebCollection) {
         RecipeCollection collection = new RecipeCollection();
-        Iterator<RecipeWeb> it = recipeWebCollection.iterator();
+        List<RecipeWeb> recipeWebs = recipeWebCollection.getRecipes();
 
-        while (it.hasNext()) {
-            RecipeWeb recipeWeb = it.next();
+        for (RecipeWeb recipeWeb : recipeWebs) {
             Recipe recipe = mRecipeWebMapper.fromWebRecipe(recipeWeb);
             collection.addRecipe(recipe);
         }
