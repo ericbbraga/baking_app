@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <bool name="should_show_detail_fragment">true</bool>
-</resources>

@@ -5,4 +5,5 @@
     android:minHeight="250dp"
     android:minWidth="250dp"
     android:previewImage="@drawable/dessert"
+    android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000" />

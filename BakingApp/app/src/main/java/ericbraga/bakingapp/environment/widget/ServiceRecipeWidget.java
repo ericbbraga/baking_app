@@ -2,10 +2,10 @@ package ericbraga.bakingapp.environment.widget;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
 
@@ -14,20 +14,33 @@ import ericbraga.bakingapp.environment.repositories.local.database.contract.Baki
 import ericbraga.bakingapp.environment.widget.model.RecipeWidget;
 
 public class ServiceRecipeWidget extends IntentService {
+
+    public static final String WIDGET_ID = "widget_id";
+
     public ServiceRecipeWidget() {
         super("ServiceRecipeWidget");
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        int appWidgetId = (int) intent.getExtras().get("widget_id");
-        RecipeWidget recipe = updateRecipe(this);
+        if (intent != null) {
+            Bundle extras =  intent.getExtras();
 
-        RemoteViews views = new RemoteViews(getPackageName(), R.layout.recipe_widget);
-        views.setTextViewText(R.id.title_recipe_widget, recipe.getName());
+            if (extras != null) {
+                int appWidgetId = extras.getInt(WIDGET_ID, 0);
+                RecipeWidget recipe = updateRecipe(this);
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+                String title = recipe == null ?
+                    getString(R.string.no_favorite_recipe) : recipe.getName();
+                RemoteViews views = new RemoteViews(getPackageName(), R.layout.recipe_widget);
+                views.setTextViewText(R.id.title_recipe_widget, title);
+
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+                appWidgetManager.updateAppWidget(appWidgetId, views);
+            }
+
+
+        }
     }
 
     private RecipeWidget updateRecipe(Context context) {

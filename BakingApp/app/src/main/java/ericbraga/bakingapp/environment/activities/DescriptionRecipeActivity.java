@@ -109,7 +109,7 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
     }
 
     private boolean shouldShowDetailFragment() {
-        return getResources().getBoolean(R.bool.should_show_detail_fragment);
+        return findViewById(R.id.detail_description_part) != null;
     }
 
     @Override

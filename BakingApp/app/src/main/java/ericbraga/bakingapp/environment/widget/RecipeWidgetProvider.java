@@ -25,7 +25,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     private void refreshTitle(Context context, int appWidgetId) {
         Intent it = new Intent(context, ServiceRecipeWidget.class);
-        it.putExtra("widget_id", appWidgetId);
+        it.putExtra(ServiceRecipeWidget.WIDGET_ID, appWidgetId);
         context.startService(it);
     }
 
