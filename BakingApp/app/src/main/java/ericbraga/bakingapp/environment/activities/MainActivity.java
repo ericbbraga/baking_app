@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements DisplayRecipesCon
         ((App) getApplication()).inject(this);
 
         mPresenter.setRouter(this);
-
         initFragment();
     }
 

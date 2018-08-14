@@ -19,7 +19,7 @@ public class RecipePresenterFactory<T> {
         RecipeDisplayInteractor<T> recipeDisplayInteractor =
                 new LoadRecipeContents<>(mImageRepository);
 
-        return new RecipePresenter<T>(recipeDisplayInteractor, recipe);
+        return new RecipePresenter<>(recipeDisplayInteractor, recipe);
     }
 
 }

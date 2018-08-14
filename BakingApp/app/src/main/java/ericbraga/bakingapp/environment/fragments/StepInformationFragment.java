@@ -1,6 +1,7 @@
 package ericbraga.bakingapp.environment.fragments;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,9 +79,22 @@ public class StepInformationFragment extends Fragment
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onPause() {
+        super.onPause();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            detachPresenter();
+        }
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            detachPresenter();
+        }
+    }
+
+    private void detachPresenter() {
         if (mPresenter != null) {
             mPresenter.detach();
         }
@@ -93,6 +107,14 @@ public class StepInformationFragment extends Fragment
 
     public int getCurrentIndex() {
         return mPresenter.getCurrentStepIndex();
+    }
+
+    public boolean isPlaying() {
+        return mPresenter.isPlaying();
+    }
+
+    public long getCurrentPosition() {
+        return mPresenter.getCurrentPosition();
     }
 
     @Override
@@ -180,4 +202,5 @@ public class StepInformationFragment extends Fragment
             mNextWidget.setEnabled(false);
         }
     }
+
 }

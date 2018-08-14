@@ -3,7 +3,6 @@ package ericbraga.bakingapp.environment.repositories.web.boundary;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import ericbraga.bakingapp.environment.repositories.web.models.IngredientWeb;

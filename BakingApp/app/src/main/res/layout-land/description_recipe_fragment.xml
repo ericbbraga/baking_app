@@ -20,22 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/description_recipe_image"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitXY"
-                tools:background="#FF0000"
-                android:contentDescription="TODO" />
-
             <TextView
                 android:id="@+id/description_recipe_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:layout_toRightOf="@+id/description_recipe_image"
-                android:layout_toEndOf="@+id/description_recipe_image"
                 style="@style/TitleStyle"
                 tools:text="Recipe Name"
                 tools:background="#FFFF00"/>

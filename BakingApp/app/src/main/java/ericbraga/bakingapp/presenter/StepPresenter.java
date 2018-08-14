@@ -47,6 +47,7 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
     public void nextStepWidgetClicked() {
         if (hasNextStep()) {
             mCurrentStepIndex = mCurrentStepIndex + 1;
+            mPlaying = false;
             loadStepContent();
         }
     }
@@ -55,6 +56,7 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
     public void previousStepWidgetClicked() {
         if (hasPreviousStep()) {
             mCurrentStepIndex = mCurrentStepIndex - 1;
+            mPlaying = false;
             loadStepContent();
         }
     }
@@ -69,6 +71,16 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
         mView = null;
     }
 
+    @Override
+    public long getCurrentPosition() {
+        return mMediaController.getCurrentPosition();
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return mPlaying;
+    }
+
     private void loadStepContent() {
         mCurrentStep = mSteps.get(mCurrentStepIndex);
         mStepContentInteractor.execute(mCurrentStep, this);
@@ -81,7 +93,6 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
             mView.hideVideo();
             displayCommonInformation();
         }
-
     }
 
     @Override
@@ -152,7 +163,6 @@ public class StepPresenter<T> implements DisplayStepContract.Presenter<T>,
     @Override
     public void onMediaPlayerChangedState(boolean playing) {
         if (mView != null) {
-
             mPlaying = playing;
 
             if (mPlaying) {

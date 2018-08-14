@@ -24,6 +24,7 @@
         android:src="@android:drawable/ic_media_play"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
+        android:contentDescription="@string/more_step_details"
         app:layout_constraintLeft_toRightOf="@+id/steps_short_description"
         app:layout_constraintRight_toRightOf="parent" />
 

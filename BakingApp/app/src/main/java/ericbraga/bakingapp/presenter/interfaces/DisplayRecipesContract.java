@@ -1,6 +1,5 @@
 package ericbraga.bakingapp.presenter.interfaces;
 
-import ericbraga.bakingapp.environment.activities.MainActivity;
 import ericbraga.bakingapp.model.Recipe;
 import ericbraga.bakingapp.model.RecipeCollection;
 

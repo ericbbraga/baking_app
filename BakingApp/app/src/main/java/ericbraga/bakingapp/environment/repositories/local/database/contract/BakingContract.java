@@ -3,8 +3,6 @@ package ericbraga.bakingapp.environment.repositories.local.database.contract;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import java.net.URI;
-
 public final class BakingContract {
     private BakingContract() {}
 

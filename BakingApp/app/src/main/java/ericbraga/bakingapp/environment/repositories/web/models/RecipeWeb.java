@@ -2,7 +2,6 @@ package ericbraga.bakingapp.environment.repositories.web.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class RecipeWeb {

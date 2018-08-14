@@ -21,14 +21,23 @@ public class StepFragmentHelper {
     private final Context mContext;
     private final List<Step> mSteps;
     private final int mSelectedPosition;
+    private final boolean mPlaying;
+    private final long mCurrentPosition;
     private StepInformationFragment mFragment;
     private AndroidPlayer mAndroidPlayer;
     private StepPresenter<Drawable> mPresenter;
 
     public StepFragmentHelper(Context context, List<Step> steps, int selectedPosition) {
+        this(context, steps, selectedPosition, false, 0);
+    }
+
+    public StepFragmentHelper(Context context, List<Step> steps, int selectedPosition,
+                              boolean playing, long currentPosition) {
         mContext = context;
         mSteps = steps;
         mSelectedPosition = selectedPosition;
+        mPlaying = playing;
+        mCurrentPosition = currentPosition;
     }
 
     public StepInformationFragment createStepFragment() {
@@ -41,7 +50,8 @@ public class StepFragmentHelper {
 
     private void configureAndroidPlayer() {
         String applicationName = mContext.getResources().getString(R.string.app_name);
-        mAndroidPlayer = new AndroidPlayer(mContext, applicationName);
+        mAndroidPlayer = new AndroidPlayer(mContext, applicationName, mPlaying, mCurrentPosition);
+
     }
 
     private void configurePresenter(List<Step> steps) {

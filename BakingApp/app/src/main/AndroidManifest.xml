@@ -21,8 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".environment.activities.DescriptionRecipeActivity" />
-        <activity android:name=".environment.activities.StepInformationActivity" />
+        <activity
+            android:name=".environment.activities.DescriptionRecipeActivity"
+            android:parentActivityName=".environment.activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".environment.activities.MainActivity"/>
+        </activity>
+
+        <activity
+            android:name=".environment.activities.StepInformationActivity"
+            android:parentActivityName=".environment.activities.DescriptionRecipeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".environment.activities.DescriptionRecipeActivity"/>
+        </activity>
 
         <receiver android:name=".environment.widget.RecipeWidgetProvider">
             <intent-filter>

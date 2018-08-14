@@ -14,4 +14,9 @@
     <string name="baking_element_banner_description">Baking Element Banner</string>
     <string name="baking_favorite_element_description">Favorite Star Button</string>
     <string name="no_favorite_recipe">There is not favorite recipe</string>
+    <string name="more_step_details">More Step Details</string>
+    <string name="play_video">Play Video</string>
+    <string name="pause_video">Pause Video</string>
+    <string name="step_information_thumbnail">Step Information Thumbnail</string>
+    <string name="there_is_not_connection">There is not connection</string>
 </resources>

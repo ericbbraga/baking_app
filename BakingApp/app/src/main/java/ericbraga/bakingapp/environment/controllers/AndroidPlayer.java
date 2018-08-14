@@ -29,10 +29,18 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
     private String mApplicationName;
     private ExternalMediaContract.Callback mCallback;
     private ExoPlayer mExoPlayer;
+    private boolean mShouldStartPlaying;
+    private long mStartAt;
 
-    public AndroidPlayer(Context context, String applicationName) {
+    public AndroidPlayer(Context context, String applicationName,
+                         boolean shouldStartPlaying, long startAt) {
         mContext = context;
         mApplicationName = applicationName;
+        mShouldStartPlaying = shouldStartPlaying;
+        mStartAt = startAt;
+
+        TrackSelector trackSelector = new DefaultTrackSelector();
+        mExoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector);
     }
 
     @Override
@@ -54,12 +62,14 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
         MediaSource mediaSource = new ExtractorMediaSource.Factory(httpDataSourceFactory)
                 .createMediaSource(Uri.parse(url));
 
-        TrackSelector trackSelector = new DefaultTrackSelector();
-        mExoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector);
-
         mExoPlayer.prepare(mediaSource);
-        mExoPlayer.setPlayWhenReady(false);
+        if (mShouldStartPlaying) {
+            mExoPlayer.seekTo(mStartAt);
+        }
+
+        mExoPlayer.setPlayWhenReady(mShouldStartPlaying);
         mExoPlayer.addListener(this);
+
 
         if (mPlayerView != null) {
             mPlayerView.setPlayer(mExoPlayer);
@@ -84,13 +94,15 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
     }
 
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {}
+    public long getCurrentPosition() {
+        return mExoPlayer.getCurrentPosition();
+    }
 
     @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {}
-
-    @Override
-    public void onLoadingChanged(boolean isLoading) {}
+    public void reset() {
+        mShouldStartPlaying = false;
+        mStartAt = 0;
+    }
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
@@ -99,6 +111,15 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
             mCallback.onMediaPlayerChangedState(playing);
         }
     }
+
+    @Override
+    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {}
+
+    @Override
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {}
+
+    @Override
+    public void onLoadingChanged(boolean isLoading) {}
 
     @Override
     public void onRepeatModeChanged(int repeatMode) {}

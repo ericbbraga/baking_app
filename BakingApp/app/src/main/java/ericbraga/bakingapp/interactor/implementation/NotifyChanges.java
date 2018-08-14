@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import ericbraga.bakingapp.environment.widget.RecipeWidgetProvider;
-import ericbraga.bakingapp.environment.widget.RecipeWidgetViewService;
 import ericbraga.bakingapp.interactor.interfaces.NotifyChangesInteractor;
 
 public class NotifyChanges implements NotifyChangesInteractor {

@@ -10,5 +10,7 @@ public interface ExternalMediaContract {
     void prepare(String url);
     void stop();
     void release();
+    long getCurrentPosition();
+    void reset();
 
 }

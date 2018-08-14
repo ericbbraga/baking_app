@@ -2,7 +2,6 @@ package ericbraga.bakingapp.espresso;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
@@ -12,10 +11,8 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.matcher.IntentMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.AllOf;
 import org.junit.After;
@@ -39,6 +36,18 @@ public class MainActivityTest {
 
     @Before
     public void setUp() {
+        /**
+         * @see MockApp
+         * @see RecipeInteractorModuleIdlingResourceModule
+         * I'm testing the real app here. However,
+         * I named the 'MockApp' object because a need to introduce IdlingResources
+         * (setRecipeInteractorModule) to wait for Interation with other
+         * threads (please check MockApp.java class).
+         *
+         * I've decided use this approach since I don't like to change my production code to
+         * introduce IdlingResource code (please check the
+         * RecipeInteractorModuleIdlingResourceModule class)
+         * */
         MockApp mockApp = (MockApp) InstrumentationRegistry.getInstrumentation()
             .getTargetContext().getApplicationContext();
 

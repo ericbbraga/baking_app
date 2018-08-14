@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,11 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
         }
 
         ((App) getApplication()).inject(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         configurePresenter(recipe);
         configureViews();
@@ -116,5 +123,16 @@ public class DescriptionRecipeActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         mPresenter.onResume();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

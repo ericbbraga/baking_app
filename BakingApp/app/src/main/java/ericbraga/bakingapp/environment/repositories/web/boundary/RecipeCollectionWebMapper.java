@@ -1,6 +1,5 @@
 package ericbraga.bakingapp.environment.repositories.web.boundary;
 
-import java.util.Iterator;
 import java.util.List;
 
 import ericbraga.bakingapp.environment.repositories.web.RecipeWebCollection;
