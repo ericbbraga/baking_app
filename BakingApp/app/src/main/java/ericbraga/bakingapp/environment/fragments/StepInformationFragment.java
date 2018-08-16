@@ -29,6 +29,7 @@ public class StepInformationFragment extends Fragment
     private View mPreviousWidget;
     private DisplayStepContract.Presenter<Drawable> mPresenter;
     private PlayerViewContract mPlayerViewContract;
+    private int mStepPosition;
 
     @Nullable
     @Override
@@ -203,4 +204,7 @@ public class StepInformationFragment extends Fragment
         }
     }
 
+    public void setStepPosition(int stepPosition) {
+        mPresenter.setCurrentStepIndex(stepPosition);
+    }
 }

@@ -2,6 +2,7 @@ package ericbraga.bakingapp.environment.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ericbraga.bakingapp.R;
-import ericbraga.bakingapp.environment.fragments.StepFragmentHelper;
+import ericbraga.bakingapp.environment.fragments.StepResourcesHelper;
 import ericbraga.bakingapp.environment.fragments.StepInformationFragment;
+import ericbraga.bakingapp.environment.interfaces.PlayerViewContract;
 import ericbraga.bakingapp.model.Step;
+import ericbraga.bakingapp.presenter.StepPresenter;
 
 public class StepInformationActivity extends AppCompatActivity {
     public static final String STEPS_BUNBLE_KEY = "steps";
@@ -71,9 +74,15 @@ public class StepInformationActivity extends AppCompatActivity {
     private void configureViews(List<Step> steps, int selected,
                                 boolean playing, long currentPosition) {
         setContentView(R.layout.step_information_activity);
-        StepFragmentHelper helper = new StepFragmentHelper(this, steps, selected, playing,
+        StepResourcesHelper helper = new StepResourcesHelper(this, steps, selected, playing,
             currentPosition);
-        mFragment = helper.createStepFragment();
+
+        StepPresenter<Drawable> presenter = helper.getPresenter();
+        PlayerViewContract playerViewContract = helper.getPlayerViewContract();
+
+        mFragment = new StepInformationFragment();
+        mFragment.setPresenter(presenter);
+        mFragment.setPlayerViewContract(playerViewContract);
     }
 
     private void configureActionBar() {

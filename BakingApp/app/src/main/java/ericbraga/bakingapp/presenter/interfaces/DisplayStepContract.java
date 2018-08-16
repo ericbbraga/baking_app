@@ -7,6 +7,7 @@ public interface DisplayStepContract {
         int getCurrentStepIndex();
         void nextStepWidgetClicked();
         void previousStepWidgetClicked();
+        void setCurrentStepIndex(int stepPosition);
         void detach();
         long getCurrentPosition();
         boolean isPlaying();

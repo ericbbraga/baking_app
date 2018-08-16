@@ -24,10 +24,18 @@
 
     <style name="TitleStyleIngredients" parent="TitleCursive">
         <item name="android:textSize">20sp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="TitleStyleStep" parent="TitleCursive">
         <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/step_title_background</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="componentStyleStep">
+        <item name="android:background">@drawable/step_title_background</item>
     </style>
 
     <style name="TitleStyleMedia" parent="TitleCursive">

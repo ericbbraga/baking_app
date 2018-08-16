@@ -16,6 +16,8 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
@@ -24,28 +26,39 @@ import ericbraga.bakingapp.presenter.interfaces.ExternalMediaContract;
 
 public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract {
 
-    private final Context mContext;
     private PlayerView mPlayerView;
-    private String mApplicationName;
     private ExternalMediaContract.Callback mCallback;
     private ExoPlayer mExoPlayer;
     private boolean mShouldStartPlaying;
     private long mStartAt;
+    private final ExtractorMediaSource.Factory mFactory;
+    private boolean mPlaying;
 
     public AndroidPlayer(Context context, String applicationName,
                          boolean shouldStartPlaying, long startAt) {
-        mContext = context;
-        mApplicationName = applicationName;
         mShouldStartPlaying = shouldStartPlaying;
         mStartAt = startAt;
 
-        TrackSelector trackSelector = new DefaultTrackSelector();
-        mExoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector);
+        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+        TrackSelector trackSelector = new DefaultTrackSelector(bandwidthMeter);
+        mExoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
+
+        String userAgent = Util.getUserAgent(context, applicationName);
+        DefaultHttpDataSourceFactory httpDataSourceFactory =
+            new DefaultHttpDataSourceFactory(userAgent);
+
+        mFactory = new ExtractorMediaSource.Factory(httpDataSourceFactory);
+        mPlaying = false;
     }
 
     @Override
     public void setCallback(ExternalMediaContract.Callback callback) {
         mCallback = callback;
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return mPlaying;
     }
 
     @Override
@@ -55,12 +68,7 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
 
     @Override
     public void prepare(String url) {
-        String userAgent = Util.getUserAgent(mContext, mApplicationName);
-        DefaultHttpDataSourceFactory httpDataSourceFactory =
-                new DefaultHttpDataSourceFactory(userAgent);
-
-        MediaSource mediaSource = new ExtractorMediaSource.Factory(httpDataSourceFactory)
-                .createMediaSource(Uri.parse(url));
+        MediaSource mediaSource = mFactory.createMediaSource(Uri.parse(url));
 
         mExoPlayer.prepare(mediaSource);
         if (mShouldStartPlaying) {
@@ -90,6 +98,7 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
 
         if (mExoPlayer != null) {
             mExoPlayer.release();
+            mExoPlayer = null;
         }
     }
 
@@ -106,9 +115,9 @@ public class AndroidPlayer implements ExternalMediaContract, PlayerViewContract 
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        boolean playing = (Player.STATE_READY == playbackState) && playWhenReady;
+        mPlaying = (Player.STATE_READY == playbackState) && playWhenReady;
         if (mCallback != null) {
-            mCallback.onMediaPlayerChangedState(playing);
+            mCallback.onMediaPlayerChangedState();
         }
     }
 

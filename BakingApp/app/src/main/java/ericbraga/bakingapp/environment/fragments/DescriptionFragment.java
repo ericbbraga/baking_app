@@ -90,8 +90,8 @@ public class DescriptionFragment extends Fragment
     }
 
     @Override
-    public void showSteps(List<Step> steps) {
-        StepsAdapter adapter = new StepsAdapter(steps);
+    public void showSteps(List<Step> steps, int currentStepIndex) {
+        StepsAdapter adapter = new StepsAdapter(steps, currentStepIndex);
         adapter.setCallback(this);
         mStepsRecycleView.setAdapter(adapter);
         mStepsRecycleView.setLayoutManager(new LinearLayoutManager(mContext));

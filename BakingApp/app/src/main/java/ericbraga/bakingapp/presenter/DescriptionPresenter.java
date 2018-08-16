@@ -8,18 +8,24 @@ import ericbraga.bakingapp.model.Step;
 import ericbraga.bakingapp.presenter.interfaces.DescriptionRecipeContract;
 
 public class DescriptionPresenter implements DescriptionRecipeContract.Presenter {
+    private static final int INVALID_STEP_SELECTED = -1;
     private DescriptionRecipeContract.Router mRouter;
     private Recipe mRecipe;
     private DescriptionRecipeContract.View mView;
+    private int mStepSelected;
 
-    @Override
-    public void configureRecipe(Recipe recipe) {
-        mRecipe = recipe;
+    public DescriptionPresenter() {
+        mStepSelected = INVALID_STEP_SELECTED;
     }
 
     @Override
     public void setRecipe(Recipe recipe) {
         mRecipe = recipe;
+    }
+
+    @Override
+    public void setStepSelect(int currentStepIndex) {
+        mStepSelected = currentStepIndex;
     }
 
     @Override
@@ -62,7 +68,7 @@ public class DescriptionPresenter implements DescriptionRecipeContract.Presenter
     private void loadSteps() {
         if (hasValidConfig()) {
             List<Step> steps = mRecipe.getSteps();
-            mView.showSteps(steps);
+            mView.showSteps(steps, mStepSelected);
         }
     }
 

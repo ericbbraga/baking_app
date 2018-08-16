@@ -8,22 +8,20 @@ import ericbraga.bakingapp.model.Step;
 
 public interface DescriptionRecipeContract {
     interface Presenter {
-        void configureRecipe(Recipe recipe);
-
         void setRouter(Router router);
-
         void attachView(DescriptionRecipeContract.View view);
         void detachView();
         void onResume();
         void onPause();
         void showMoreSteps(int position);
         void setRecipe(Recipe recipe);
+        void setStepSelect(int currentStepIndex);
     }
 
     interface View {
         void showDescriptionRecipe(String recipeName);
         void showIngredients(List<Ingredient> ingredients);
-        void showSteps(List<Step> steps);
+        void showSteps(List<Step> steps, int currentStepIndex);
     }
 
     interface Router {

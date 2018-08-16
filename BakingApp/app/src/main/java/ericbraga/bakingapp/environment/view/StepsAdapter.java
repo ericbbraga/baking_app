@@ -20,12 +20,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
 
     private StepsAdapterCallback mCallback;
 
+    private int mSelectedPosition;
+
     public interface StepsAdapterCallback {
         void onClickItem(int position);
     }
 
-    public StepsAdapter(List<Step> steps) {
+    public StepsAdapter(List<Step> steps, int selectedPosition) {
         mSteps = new ArrayList<>(steps);
+        mSelectedPosition = selectedPosition;
     }
 
     public void setCallback(StepsAdapterCallback callback) {
@@ -48,6 +51,12 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
         String stepDescription = String.format(Locale.getDefault(),
                 "%d. %s", position, step.getShortDescription());
 
+        if (mSelectedPosition == position) {
+            holder.mView.setSelected(true);
+        } else {
+            holder.mView.setSelected(false);
+        }
+
         holder.mTitle.setText(stepDescription);
     }
 
@@ -57,10 +66,12 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
     }
 
     class StepsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        View mView;
         TextView mTitle;
 
         StepsHolder(View itemView) {
             super(itemView);
+            mView = itemView;
             mTitle = itemView.findViewById(R.id.steps_short_description);
             itemView.setOnClickListener(this);
         }
@@ -68,8 +79,9 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsHolder>
         @Override
         public void onClick(View view) {
             if (mCallback != null) {
-                int position = getAdapterPosition();
-                mCallback.onClickItem(position);
+                mSelectedPosition = getAdapterPosition();
+                mCallback.onClickItem(mSelectedPosition);
+                notifyDataSetChanged();
             }
         }
     }
