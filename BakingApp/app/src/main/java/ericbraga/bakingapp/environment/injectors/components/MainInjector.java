@@ -7,6 +7,7 @@ import ericbraga.bakingapp.environment.activities.MainActivity;
 import ericbraga.bakingapp.environment.injectors.modules.common.AsyncReadRepositoryModule;
 import ericbraga.bakingapp.environment.injectors.modules.common.AsyncWriteRepositoryModule;
 import ericbraga.bakingapp.environment.injectors.modules.common.ChangeRecipeFavorteInteractorModule;
+import ericbraga.bakingapp.environment.injectors.modules.common.ContextModule;
 import ericbraga.bakingapp.environment.injectors.modules.common.FavoriteRecipeInteractorModule;
 import ericbraga.bakingapp.environment.injectors.modules.main.MainModule;
 import ericbraga.bakingapp.environment.injectors.modules.common.NetworkModule;
@@ -20,6 +21,7 @@ import ericbraga.bakingapp.environment.injectors.modules.common.WebUrlModule;
                 AsyncReadRepositoryModule.class,
                 AsyncWriteRepositoryModule.class,
                 ChangeRecipeFavorteInteractorModule.class,
+                ContextModule.class,
                 FavoriteRecipeInteractorModule.class,
                 MainModule.class,
                 NetworkModule.class,

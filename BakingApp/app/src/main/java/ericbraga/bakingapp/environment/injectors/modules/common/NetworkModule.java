@@ -10,14 +10,8 @@ import ericbraga.bakingapp.environment.util.NetworkManager;
 
 @Module
 public class NetworkModule {
-    private Context mContext;
-
-    public NetworkModule(Context context) {
-        mContext = context;
-    }
-
     @Provides @Singleton
-    public NetworkManager provideNetworkManager() {
-        return new NetworkManager(mContext);
+    public NetworkManager provideNetworkManager(Context context) {
+        return new NetworkManager(context);
     }
 }

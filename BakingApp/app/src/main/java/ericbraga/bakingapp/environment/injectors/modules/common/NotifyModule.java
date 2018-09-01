@@ -10,14 +10,8 @@ import ericbraga.bakingapp.interactor.interfaces.NotifyChangesInteractor;
 @Module
 public class NotifyModule {
 
-    private Context mContext;
-
-    public NotifyModule(Context context) {
-        mContext = context;
-    }
-
     @Provides
-    public NotifyChangesInteractor provideNotifyInteractor() {
-        return new NotifyChanges(mContext);
+    public NotifyChangesInteractor provideNotifyInteractor(Context context) {
+        return new NotifyChanges(context);
     }
 }
